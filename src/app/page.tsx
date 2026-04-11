@@ -30,11 +30,13 @@ export default function Home() {
               DIMAS WIDY SAPUTRA
             </h1>
             <h1 className=" font-black text-2xl mt-4 md:text-5xl opacity-50">
-              Creative.
+              Creative Person.
             </h1>
+            {/* Btn CV */}
             <Link
-              href=""
-              className="py-1 px-2 bg-foreground mt-4 inline-flex items-center gap-3 shadow-2xl rounded-xl"
+              target="_blank"
+              href="https://drive.google.com/file/d/1HrZd5hQpGUMM97I65QJ9fTSIPFZp3K-x/view"
+              className="py-1 px-2 bg-foreground mt-4 inline-flex items-center gap-3 shadow-2xl rounded-md"
             >
               <p className="font-bold text-sm text-background">See my CV</p>
               <ArrowRight className="text-background" size={15} />

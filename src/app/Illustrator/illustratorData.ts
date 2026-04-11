@@ -21,3 +21,14 @@ export const garuda: readonly garudaImage[] = [
     src: "/asset/gambar-ill/garuda/badan.webp",
   },
 ] as const;
+
+export const figures: readonly garudaImage[] = [
+  {
+    alt: "Hellcat",
+    src: "/asset/gambar-ill/hellcatmobil.webp",
+  },
+  {
+    alt: "MoonKnight",
+    src: "/asset/gambar-ill/moonknight.webp",
+  },
+] as const;

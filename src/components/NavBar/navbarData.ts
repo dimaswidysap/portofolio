@@ -14,7 +14,7 @@ export const navLinks: readonly NavLink[] = [
   },
   {
     name: "Front-End",
-    href: "/Front-End",
+    href: "/FrontEnd",
   },
   {
     name: "Tentang Aku",
