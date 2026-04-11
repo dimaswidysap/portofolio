@@ -22,16 +22,8 @@ export default function Home() {
     <main className="w-full overflow-hidden">
       {/* container foto */}
       <section className="w-full h-screen flex justify-center relative overflow-hidden">
-        {/* <div className="h-screen aspect-video bg-yellow-200 absolute  -right-[80%] md:-right-[60%] lg:w-full lg:right-0">
-          <Image
-            className="object-cover"
-            src="/asset/owner-pic/personv2.png"
-            alt="Foto Profil"
-            fill
-            unoptimized
-          />
-        </div> */}
-        <div className="w-full max-w-7xl flex justify-center items-center h-screen">
+        <span className="inline-flex h-1/2 absolute aspect-square top-0 right-0 bg-blue-900 opacity-60 blur-[50px] rounded-full translate-x-1/2 -translate-y-1/2 scale-150 md:scale-200 lg:scale-250"></span>
+        <div className="w-full relative z-2 max-w-7xl flex justify-center items-center h-screen">
           <div className="w-full px-2">
             <p>I hope I become the man I want to be.</p>
             <h1 className=" font-black text-2xl md:text-5xl">
@@ -137,7 +129,7 @@ export default function Home() {
             <div className="relative w-full h-full  rounded-md overflow-hidden">
               <Image
                 className="object-cover"
-                src="/asset/owner-pic/personv2.png"
+                src="/asset/owner-pic/coding.png"
                 alt="Random"
                 fill
                 unoptimized
@@ -150,7 +142,7 @@ export default function Home() {
               <div className="relative w-full h-full rounded-md overflow-hidden">
                 <Image
                   className="object-cover"
-                  src="/asset/owner-pic/personv2.png"
+                  src="/asset/owner-pic/profil-github.png"
                   alt="Random"
                   fill
                   unoptimized
