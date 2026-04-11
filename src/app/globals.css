@@ -1,26 +1,35 @@
 @import "tailwindcss";
 
 :root {
+  /* Default: Dark Theme */
+  --background: #222831;
+  --background-second: #181c23;
+  --foreground: #b6b6b6;
+  --footer: #08060b;
+  --footerv2: rgb(20, 21, 24);
+  --font-footer: #b6b6b6;
+}
+
+/* Jika atribut data-theme="light" aktif, timpa variabelnya */
+[data-theme="light"] {
   --background: #ffffff;
+  --background-second: #b9c8df;
   --foreground: #171717;
 }
 
 @theme inline {
+  --color-font-footer: var(--font-footer);
+  --color-footer: var(--footer);
+  --color-footerv2: var(--footerv2);
   --color-background: var(--background);
+  --color-background-second: var(--background-second);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  transition:
+    background-color 0.3s,
+    color 0.3s; /* Animasi smooth */
 }

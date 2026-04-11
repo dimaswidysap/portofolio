@@ -1,103 +1,176 @@
+"use client";
+
+import { motion, useScroll, useTransform } from "framer-motion";
+import { useRef } from "react";
 import Image from "next/image";
+import { garuda } from "./Illustrator/illustratorData";
+import Link from "next/link";
+import { ArrowRight } from "lucide-react";
 
 export default function Home() {
-  return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+  const targetRef = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: targetRef,
+    offset: ["start end", "end start"],
+  });
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+  const y = useTransform(scrollYProgress, [0, 1], [100, -100]);
+  const sayapKanan = useTransform(scrollYProgress, [0, 1], ["0deg", "45deg"]);
+  const sayapKiri = useTransform(scrollYProgress, [0, 1], ["0deg", "-45deg"]);
+
+  return (
+    <main className="w-full overflow-hidden">
+      {/* container foto */}
+      <section className="w-full h-screen flex justify-center relative overflow-hidden">
+        {/* <div className="h-screen aspect-video bg-yellow-200 absolute  -right-[80%] md:-right-[60%] lg:w-full lg:right-0">
+          <Image
+            className="object-cover"
+            src="/asset/owner-pic/personv2.png"
+            alt="Foto Profil"
+            fill
+            unoptimized
+          />
+        </div> */}
+        <div className="w-full max-w-7xl flex justify-center items-center h-screen">
+          <div className="w-full px-2">
+            <p>I hope I become the man I want to be.</p>
+            <h1 className=" font-black text-2xl md:text-5xl">
+              DIMAS WIDY SAPUTRA
+            </h1>
+            <h1 className=" font-black text-2xl mt-4 md:text-5xl opacity-50">
+              Creative.
+            </h1>
+            <Link
+              href=""
+              className="py-1 px-2 bg-foreground mt-4 inline-flex items-center gap-3 shadow-2xl rounded-xl"
+            >
+              <p className="font-bold text-sm text-background">See my CV</p>
+              <ArrowRight className="text-background" size={15} />
+            </Link>
+          </div>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+      </section>
+
+      {/* konten bawah */}
+
+      <section className="w-full relative py-52 z-1">
+        {/* container garuda */}
+        <section ref={targetRef} className="h-200 w-full  flex justify-center">
+          <motion.div
+            style={{ y }}
+            className="h-full relative aspect-video md:-translate-x-[20%] lg:-translate-x-[30%]"
+          >
+            {garuda.map((items, index) => {
+              let style = {};
+
+              if (index === 2) {
+                style = { rotate: sayapKanan };
+              }
+
+              if (index === 1) {
+                style = { rotate: sayapKiri };
+              }
+
+              return (
+                <motion.figure
+                  style={style}
+                  key={items.alt}
+                  className="w-full h-full absolute"
+                >
+                  <Image
+                    className="object-cover"
+                    src={items.src}
+                    alt={items.alt}
+                    fill
+                    unoptimized
+                  />
+                </motion.figure>
+              );
+            })}
+          </motion.div>
+        </section>
+
+        {/* konten teks */}
+        <section className="absolute z-2 w-full h-full inset-0 max-w-120 left-1/2 -translate-x-1/2">
+          {/* background */}
+          <span className="inline-flex h-full w-full bg-black/50 rounded-t-2xl"></span>
+
+          {/* konten */}
+          <section className="absolute inset-0 h-full w-full pt-24">
+            <div className="w-full relative z-2">
+              <h1 className="w-full flex justify-start px-2.5 font-black text-5xl">
+                Illustrator
+              </h1>
+              <h5 className="w-full flex justify-center">and</h5>
+              <h1 className="w-full flex justify-end px-2.5 font-black text-5xl">
+                Front-End
+              </h1>
+            </div>
+            <div className="w-full h-1/2 absolute inset-0">
+              <figure className="absolute h-32 aspect-square rotate-12 mt-4">
+                <Image
+                  className="object-cover"
+                  src="/asset/icon/illustrator.png"
+                  alt="icon-adobe-illustrator"
+                  fill
+                  unoptimized
+                />
+              </figure>
+              <figure className="absolute right-0 top-[15rem] h-32 aspect-square -rotate-12 mt-4">
+                <Image
+                  className="object-cover"
+                  src="/asset/icon/vscode.svg"
+                  alt="icon-vscode"
+                  fill
+                  unoptimized
+                />
+              </figure>
+            </div>
+          </section>
+        </section>
+
+        {/* konten front-end */}
+
+        <section className="absolute flex-col h-full w-full inset-0 flex items-center justify-end items-end pb-20 md:pr-4">
+          {/* konten 1 */}
+          <figure className="relative z-10 rounded-2xl shadow-2xl w-[90%] md:w-[70%] max-w-200 aspect-video bg-background-second p-2 md:p-4">
+            <div className="relative w-full h-full  rounded-md overflow-hidden">
+              <Image
+                className="object-cover"
+                src="/asset/owner-pic/personv2.png"
+                alt="Random"
+                fill
+                unoptimized
+              />
+            </div>
+          </figure>
+          {/*  */}
+          <section className="w-full flex mt-4 px-4 gap-4 lg:pl-[50%]">
+            <figure className="w-1/2 aspect-square relative z-10 rounded-2xl shadow-2xl md:w-[40%] lg:max-w-[40rem]  bg-background-second p-2 md:p-4">
+              <div className="relative w-full h-full rounded-md overflow-hidden">
+                <Image
+                  className="object-cover"
+                  src="/asset/owner-pic/personv2.png"
+                  alt="Random"
+                  fill
+                  unoptimized
+                />
+              </div>
+            </figure>
+            <figure className="flex-1 aspect-vedeo relative z-10 rounded-2xl shadow-2xl md:w-[40%] lg:max-w-[40rem]  bg-background-second p-2 md:p-4">
+              <div className="relative w-full h-full rounded-md overflow-hidden">
+                <Image
+                  className="object-cover"
+                  src="/asset/owner-pic/personv2.png"
+                  alt="Random"
+                  fill
+                  unoptimized
+                />
+              </div>
+            </figure>
+          </section>
+        </section>
+      </section>
+    </main>
   );
 }
