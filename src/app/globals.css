@@ -5,6 +5,7 @@
   --background: #222831;
   --background-second: #181c23;
   --foreground: #b6b6b6;
+  --always-foreground: #b6b6b6;
   --footer: #08060b;
   --footerv2: rgb(20, 21, 24);
   --font-footer: #b6b6b6;
@@ -18,6 +19,7 @@
 }
 
 @theme inline {
+  --color-always-foreground: var(--always-foreground);
   --color-font-footer: var(--font-footer);
   --color-footer: var(--footer);
   --color-footerv2: var(--footerv2);

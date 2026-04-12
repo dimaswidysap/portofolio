@@ -6,6 +6,19 @@ const Illustrator = () => {
     <main className="w-full">
       {/* page one */}
       <section className="relative w-full h-[210vh] overflow-hidden">
+        <div className="absolute h-screen w-full max-w-7xl inset-0 left-1/2 -translate-x-1/2  z-4 flex justify-center items-start">
+          <span className="mt-[10rem] relative text-always-foreground">
+            <p className="absolute left-1/2 -translate-x-1/2 -top-1/3 font-black">
+              BEST
+            </p>
+            <h1 className="font-black -rotate-10 text-5xl lg:text-7xl">
+              ILLUSTRATOR
+            </h1>
+            <p className="absolute left-1/2 -translate-x-1/2 top-1/1 font-black">
+              I MAKE.
+            </p>
+          </span>
+        </div>
         <figure className="absolute inset-0 w-full h-screen">
           <Image
             className="object-cover"
