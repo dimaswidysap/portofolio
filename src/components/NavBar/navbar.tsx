@@ -18,13 +18,15 @@ const linkMain = navLinks.filter((_, index) => index === 1 || index === 2);
 
 const renderIcon = (name: string) => {
   switch (name) {
+    case "Beranda":
+      return <Home size={15} />;
     case "Illustrator":
       return <PenTool size={15} />;
     case "Front-End":
       return <Terminal size={15} />;
-    case "Tentang Aku":
+    case "About Me":
       return <UserCircle size={15} />;
-    case "Hubungi Saya":
+    case "Contact Me":
       return <Mail size={15} />;
     default:
       return <Grid2X2 size={15} />;
