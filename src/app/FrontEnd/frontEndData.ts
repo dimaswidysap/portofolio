@@ -24,7 +24,7 @@ export const dataProjects: readonly bluePrint[] = [
   },
   {
     year: "2026",
-    title: "Vedeo TikTok Downloader",
+    title: "Vedeo-TikTok-Downloader",
     reasonProject: ["Fetch API"],
     team: ["Widy"],
     tecnology: ["HTML", "CSS", "Javascript"],
@@ -40,7 +40,7 @@ export const dataProjects: readonly bluePrint[] = [
 
   {
     year: "2026",
-    title: "WEB TodoList",
+    title: "WEB-TodoList",
     reasonProject: ["Local Storage"],
     team: ["Widy"],
     tecnology: ["HTML", "CSS", "Javascript"],

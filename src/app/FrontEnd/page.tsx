@@ -14,7 +14,6 @@ const FrontEnd = () => {
       <section className="w-full max-w-7xl h-[115vh] md:h-screen m-auto md:flex ">
         <div className="w-full h-1/2 md:w-1/2 md:h-full flex flex-col relative px-5 justify-center items-center">
           {picProject?.map((items, index) => {
-            console.log(items);
             return (
               <figure
                 key={index}
@@ -48,8 +47,7 @@ const FrontEnd = () => {
             <div className="mt-4 flex gap-4">
               <Link
                 className="bg-background-second shadow-md flex gap-2 py-2 px-1 rounded-md"
-                target="_blank"
-                href={`${displayProject?.linkRep}`}
+                href={`/project/${displayProject?.title}`}
               >
                 <span className="font-black">Repositori</span>
                 <Files className="text-blue-700" />
@@ -94,7 +92,7 @@ const FrontEnd = () => {
                 <h2 className="mt-4 text-sm font-semibold">{items.title}</h2>
                 <p className="line-clamp-3">{items.desc}</p>
                 <Link
-                  href=""
+                  href={`/project/${items.title}`}
                   className="w-full mb-5 bg-background inline-flex justify-center py-2.5 rounded-md shadow-md gap-1.5"
                 >
                   <span>See Project</span>

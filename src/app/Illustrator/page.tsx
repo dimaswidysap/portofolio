@@ -7,11 +7,11 @@ const Illustrator = () => {
       {/* page one */}
       <section className="relative w-full h-[210vh] overflow-hidden">
         <div className="absolute h-screen w-full max-w-7xl inset-0 left-1/2 -translate-x-1/2  z-4 flex justify-center items-start">
-          <span className="mt-[10rem] relative text-always-foreground">
-            <p className="absolute left-1/2 -translate-x-1/2 -top-1/3 font-black">
+          <span className="mt-[10rem] md:mt-[15rem] relative text-always-foreground">
+            <p className="absolute left-1/2 -translate-x-1/2 -top-1/2 font-black">
               BEST
             </p>
-            <h1 className="font-black -rotate-10 text-5xl lg:text-7xl">
+            <h1 className="font-black  text-5xl lg:text-7xl text-shadow-2xs">
               ILLUSTRATOR
             </h1>
             <p className="absolute left-1/2 -translate-x-1/2 top-1/1 font-black">
