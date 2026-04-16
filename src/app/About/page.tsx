@@ -38,7 +38,7 @@ const AboutMe = () => {
                 unoptimized
               />
             </figure>
-            <figure className="h-[40%] aspect-square absolute bottom-0 drop-shadow-2xl right-0 mt-[5rem]">
+            <figure className="h-[30%]  aspect-square absolute bottom-0 drop-shadow-2xl right-0 mt-[5rem]">
               <Image
                 className="object-cover"
                 src={`/asset/gambar-ill/kabellan.webp`}
