@@ -14,6 +14,8 @@ import {
   Mail,
 } from "lucide-react";
 
+// hook
+
 const linkHome = navLinks.find((_, index) => index === 0);
 const linkMain = navLinks.filter((_, index) => index === 1 || index === 2);
 
