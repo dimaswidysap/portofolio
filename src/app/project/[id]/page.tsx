@@ -49,7 +49,7 @@ const ProjectDetail = async ({
               </Link>
             </span>
             <span>
-              <h3 className="font-black text-xl">LIVE</h3>
+              <h3 className="font-black text-xl">SOURCE CODE</h3>
               <Link
                 className="text-blue-700 font-bold"
                 target="_blank"

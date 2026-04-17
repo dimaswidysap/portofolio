@@ -92,11 +92,13 @@ export default function Home() {
           {/* konten */}
           <section className="absolute inset-0 h-full w-full pt-24">
             <div className="w-full relative z-2">
-              <h1 className="w-full flex justify-start px-2.5 font-black text-5xl">
+              <h1 className="w-full flex justify-start px-2.5 font-black text-5xl text-always-foreground">
                 Illustrator
               </h1>
-              <h5 className="w-full flex justify-center">and</h5>
-              <h1 className="w-full flex justify-end px-2.5 font-black text-5xl">
+              <h5 className="w-full flex justify-center text-always-foreground">
+                and
+              </h5>
+              <h1 className="w-full flex justify-end px-2.5 font-black text-5xl text-always-foreground">
                 Front-End
               </h1>
             </div>

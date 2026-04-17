@@ -1,5 +1,6 @@
 "use client";
 import { useState, useRef, useEffect } from "react";
+import { usePathname } from "next/navigation";
 import ButtonThemes from "@/components/ButtonTheme/buttonToggle";
 import Link from "next/link";
 import { navLinks } from "./navbarData";
@@ -36,6 +37,7 @@ const renderIcon = (name: string) => {
 const NavBar = () => {
   const [open, setOpen] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
+  const pathname = usePathname();
 
   useEffect(() => {
     const handleOutsideClick = (event: MouseEvent) => {
@@ -56,6 +58,10 @@ const NavBar = () => {
     };
   }, [open]);
 
+  const getActiveColor = (href: string) => {
+    return pathname === href ? "bg-blue-700" : "";
+  };
+
   return (
     <header className="w-full fixed inset-0 flex justify-center bg-background-second h-max shadow-md z-50">
       <nav
@@ -63,7 +69,7 @@ const NavBar = () => {
         className="relative flex justify-between items-center w-full h-max max-w-7xl px-4 md:px-2 py-4 md:py-5"
       >
         <Link
-          className="scale-150 md:scale-100 font-bold h-max flex items-center gap-2 w-max text-sm shadow-md bg-background py-0.5 px-1 rounded-sm"
+          className={`scale-150 md:scale-100 font-bold h-max flex items-center gap-2 w-max text-sm shadow-md bg-background py-0.5 px-1 rounded-sm ${getActiveColor(linkHome?.href || "/")}`}
           href={linkHome?.href || "/"}
         >
           <Home size={15} />
@@ -75,7 +81,7 @@ const NavBar = () => {
             {linkMain.map((item) => (
               <li key={item.name}>
                 <Link
-                  className="font-bold flex items-center gap-2 w-max text-sm shadow-md bg-background py-0.5 px-1 rounded-sm"
+                  className={`${getActiveColor(item.href)} font-bold flex items-center gap-2 w-max text-sm shadow-md bg-background py-0.5 px-1 rounded-sm`}
                   href={item.href}
                 >
                   {item.name === "Illustrator" ? (
@@ -116,7 +122,7 @@ const NavBar = () => {
               >
                 <Link
                   onClick={() => setOpen(false)}
-                  className="font-bold flex items-center gap-2 w-max text-sm shadow-md bg-background py-0.5 px-1 rounded-sm"
+                  className={`font-bold flex items-center gap-2 w-max text-sm shadow-md bg-background py-0.5 px-1 rounded-sm ${getActiveColor(item.href)}`}
                   href={item.href}
                 >
                   {renderIcon(item.name)}

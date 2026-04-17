@@ -118,7 +118,7 @@ const AboutMe = () => {
               key={index}
               className="w-full flex flex-col items-center md:w-1/2 "
             >
-              <figure className="w-full md:w-1/2 aspect-square relative flex justify-center ">
+              <figure className="w-full md:w-1/2 aspect-square relative flex justify-center drop-shadow-2xl">
                 <Image
                   className="object-cover"
                   src={item.image}

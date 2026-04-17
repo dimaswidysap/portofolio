@@ -13,7 +13,7 @@
 
 /* Jika atribut data-theme="light" aktif, timpa variabelnya */
 [data-theme="light"] {
-  --background: #ffffff;
+  --background: #f3f4f4;
   --background-second: #b9c8df;
   --foreground: #171717;
 }
