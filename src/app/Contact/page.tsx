@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { links } from "@/components/Footer/footerData";
 import { ArrowUpSquare } from "lucide-react";
 
@@ -6,8 +7,18 @@ const Contact = () => {
   const linksFilter = links.filter((_, index) => index !== 0 && index !== 1);
   const gmailLink = links.find((_, index) => index === 1);
   return (
-    <main className="relative w-full bg-background-second pb-20">
-      <section className="absolute w-full h-screen inset-0 bg-red-400"></section>
+    <main className="relative w-full bg-background-second pb-20 overflow-hidden">
+      <section className="absolute w-full h-screen inset-0 ">
+        <figure className="absolute top-1/8 -right-1/8 h-1/2 lg:scale-125 aspect-square opacity-50 lg:right-0">
+          <Image
+            className="object-cover"
+            src="/asset/gambar-ill/bendera.png"
+            alt="flags"
+            fill
+            unoptimized
+          />
+        </figure>
+      </section>
       <section className="relative z-2 w-full max-w-7xl m-auto h-screen flex flex-col justify-between">
         <h1 className="text-4xl md:text-7xl w-full pt-[5rem] font-black px-2">
           GET IN TOUCH
