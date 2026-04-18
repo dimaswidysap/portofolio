@@ -6,8 +6,9 @@ const Contact = () => {
   const linksFilter = links.filter((_, index) => index !== 0 && index !== 1);
   const gmailLink = links.find((_, index) => index === 1);
   return (
-    <main className="w-full bg-background-second pb-20">
-      <section className="w-full max-w-7xl m-auto h-screen flex flex-col justify-between">
+    <main className="relative w-full bg-background-second pb-20">
+      <section className="absolute w-full h-screen inset-0 bg-red-400"></section>
+      <section className="relative z-2 w-full max-w-7xl m-auto h-screen flex flex-col justify-between">
         <h1 className="text-4xl md:text-7xl w-full pt-[5rem] font-black px-2">
           GET IN TOUCH
         </h1>
