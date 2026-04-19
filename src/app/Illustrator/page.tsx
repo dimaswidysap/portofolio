@@ -80,6 +80,26 @@ const Illustrator = () => {
           </div>
         </div>
       </section>
+      {/* second page */}
+      <section className="w-full flex flex-wrap justify-center">
+        <span className="inline-flex justify-center w-full h-[5rem] bg-background-second">
+          <span className="inline-flex items-center w-full max-w-7xl h-full">
+            <p className="font-black text-2xl md:text-3xl px-2">
+              ACTION ILLUSTRATION
+            </p>{" "}
+          </span>
+        </span>
+        <section className="w-full h-[50rem] max-w-7xl flex flex-wrap">
+          {/* conatiner mocup */}
+          <div className="w-full h-1/2 bg-red md:w-1/2 md:h-full">
+            <div className="flex w-[90%] md:w-[70%] aspect-square m-auto mt-5 bg-background-second rounded-xl p-2">
+              <figure className="w-full h-full rounded-md bg-foreground "></figure>
+            </div>
+          </div>
+          {/* container figure */}
+          <div className="w-full h-1/2 bg-red md:w-1/2 md:h-full bg-yellow-500"></div>
+        </section>
+      </section>
     </main>
   );
 };
