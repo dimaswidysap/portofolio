@@ -108,32 +108,34 @@ const NavBar = () => {
         <section
           className={`${
             open ? "translate-x-0 opacity-100" : "translate-x-full opacity-0"
-          } px-4 py-10 absolute  top-full right-0 shadow-md bg-background-second transition-all duration-200 ease-in-out`}
+          }  absolute p-1.5 top-full right-0 mt-1.5 rounded-xl shadow-md bg-footer transition-all duration-200 ease-in-out`}
         >
-          <ul className="flex gap-2 flex-col items-end">
-            {navLinks.map((item) => (
-              <li
-                key={item.name}
-                className={`${
-                  item.name === "Beranda" ||
-                  item.name === "Illustrator" ||
-                  item.name === "Front-End"
-                    ? "md:hidden"
-                    : "flex"
-                }`}
-              >
-                <Link
-                  onClick={() => setOpen(false)}
-                  className={`font-bold flex items-center gap-2 w-max text-sm shadow-md bg-background py-0.5 px-1 rounded-sm ${getActiveColor(item.href)}`}
-                  href={item.href}
+          <div className="w-full h-full bg-background-second rounded-md flex flex-col px-3 py-1">
+            <ul className="flex w-full items-start gap-4 flex-col pb-4">
+              {navLinks.map((item) => (
+                <li
+                  key={item.name}
+                  className={`${
+                    item.name === "Beranda" ||
+                    item.name === "Illustrator" ||
+                    item.name === "Front-End"
+                      ? "md:hidden"
+                      : "flex"
+                  }`}
                 >
-                  {renderIcon(item.name)}
-                  <span>{item.name}</span>
-                </Link>
-              </li>
-            ))}
-          </ul>
-          <ButtonThemes />
+                  <Link
+                    onClick={() => setOpen(false)}
+                    className={`font-bold flex items-center gap-2 w-max text-sm shadow-md bg-background py-0.5 px-1 rounded-sm ${getActiveColor(item.href)}`}
+                    href={item.href}
+                  >
+                    {renderIcon(item.name)}
+                    <span>{item.name}</span>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+            <ButtonThemes />
+          </div>
         </section>
       </nav>
     </header>
