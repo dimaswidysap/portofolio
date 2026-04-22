@@ -1,5 +1,11 @@
+"use client";
 import Image from "next/image";
+import Link from "next/link";
 import { figures } from "./illustratorData";
+import GallerySwiper from "./GallerySwiper";
+import { links } from "@/components/Footer/footerData";
+
+const tiktok = links.find((_, index) => index === 3);
 
 const Illustrator = () => {
   return (
@@ -79,6 +85,59 @@ const Illustrator = () => {
             </figure>
           </div>
         </div>
+      </section>
+      {/* second page */}
+      <section className="w-full flex flex-wrap justify-center">
+        <span className="inline-flex justify-center w-full h-[5rem] bg-background">
+          <span className="inline-flex items-center w-full max-w-7xl h-full">
+            <p className="font-black text-2xl md:text-3xl px-2">
+              ACTION ILLUSTRATION
+            </p>{" "}
+          </span>
+        </span>
+      </section>
+      {/* third page */}
+
+      <section className="w-full h-[50rem] flex justify-center overflow-hidden bg-background-second">
+        <section className="w-full h-full max-w-7xl flex flex-col-reverse md:flex-row">
+          {/* conatiner mocup */}
+          <div className="w-full h-1/2 bg-red md:w-1/3 md:h-full bg-background  shadow-2xl relative z-3">
+            {/* hiasan */}
+            <div className="w-full h-full relative  md:flex">
+              <span className="inline-flex w-1/5 aspect-square bg-background absolute top-0 right-0 -translate-y-1/2 translate-x-1/2 rounded-full"></span>
+              <span className="inline-flex w-1/5 aspect-square bg-background md:hidden absolute top-0 left-0 -translate-y-1/2 -translate-x-1/2 rounded-full"></span>
+              <span className="w-1/5 aspect-square bg-background hidden md:flex absolute bottom-0 right-0 translate-y-1/2 translate-x-1/2 rounded-full"></span>
+            </div>
+            {/* konten */}
+            <div className="absolute w-full h-full inset-0 flex items-center">
+              <div className="w-full px-2.5">
+                <h1 className="text-4xl font-black">
+                  See all my drawing activities on
+                </h1>
+                <Link
+                  href={`${tiktok?.href}`}
+                  target="_blank"
+                  className="bg-foreground shadow-md -translate-y-1/9 outline outline-background-second/50 -rotate-6 text-background-second flex items-center gap-1.5 w-max p-2 rounded-xl"
+                >
+                  <figure className="h-14 aspect-square shadow-md rounded-md relative">
+                    <Image
+                      className="object-cover p-1.5"
+                      src={`${tiktok?.src}`}
+                      alt="Foto Profil"
+                      fill
+                      unoptimized
+                    />
+                  </figure>
+                  <span className="font-black"> {tiktok?.nameContent}</span>
+                </Link>
+              </div>
+            </div>
+          </div>
+          {/* container figure */}
+          <div className="w-full flex-1 bg-red md:w-1/2 md:h-full flex items-center bg-background-second">
+            <GallerySwiper />
+          </div>
+        </section>
       </section>
     </main>
   );
