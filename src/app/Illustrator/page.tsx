@@ -1,5 +1,7 @@
+"use client";
 import Image from "next/image";
 import { figures } from "./illustratorData";
+import GallerySwiper from "./GallerySwiper";
 
 const Illustrator = () => {
   return (
@@ -82,22 +84,30 @@ const Illustrator = () => {
       </section>
       {/* second page */}
       <section className="w-full flex flex-wrap justify-center">
-        <span className="inline-flex justify-center w-full h-[5rem] bg-background-second">
+        <span className="inline-flex justify-center w-full h-[5rem] bg-background">
           <span className="inline-flex items-center w-full max-w-7xl h-full">
             <p className="font-black text-2xl md:text-3xl px-2">
               ACTION ILLUSTRATION
             </p>{" "}
           </span>
         </span>
-        <section className="w-full h-[50rem] max-w-7xl flex flex-wrap">
+      </section>
+      {/* third page */}
+
+      <section className="w-full h-[50rem] flex justify-center overflow-hidden bg-background-second">
+        <section className="w-full h-full max-w-7xl flex flex-col-reverse md:flex-row">
           {/* conatiner mocup */}
-          <div className="w-full h-1/2 bg-red md:w-1/2 md:h-full">
-            <div className="flex w-[90%] md:w-[70%] aspect-square m-auto mt-5 bg-background-second rounded-xl p-2">
-              <figure className="w-full h-full rounded-md bg-foreground "></figure>
+          <div className="w-full h-1/2 bg-red md:w-1/3 md:h-full bg-background  shadow-2xl relative z-3">
+            {/* hiasan */}
+            <div className="w-full h-full relative hidden md:flex">
+              <span className="inline-flex w-1/5 aspect-square bg-background absolute top-0 right-0 -translate-y-1/2 translate-x-1/2 rounded-full"></span>
+              <span className="inline-flex w-1/5 aspect-square bg-background absolute bottom-0 right-0 translate-y-1/2 translate-x-1/2 rounded-full"></span>
             </div>
           </div>
           {/* container figure */}
-          <div className="w-full h-1/2 bg-red md:w-1/2 md:h-full bg-yellow-500"></div>
+          <div className="w-full flex-1 bg-red md:w-1/2 md:h-full flex items-center bg-background-second">
+            <GallerySwiper />
+          </div>
         </section>
       </section>
     </main>
