@@ -201,7 +201,7 @@ export default function GallerySwiper() {
         onTouchStart={handleTouchStart}
         onTouchMove={handleTouchMove}
         onTouchEnd={handleTouchEnd}
-        className="w-full flex flex-row overflow-x-scroll pb-2"
+        className="w-full flex flex-row overflow-x-scroll  py-10"
         style={{
           gap: GAP,
           scrollbarWidth: "none",
