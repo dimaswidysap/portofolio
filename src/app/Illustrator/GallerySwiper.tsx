@@ -190,7 +190,7 @@ export default function GallerySwiper() {
   }, []);
 
   return (
-    <div className="w-full flex flex-col items-center gap-4 select-none py-[5rem] md:scale-125">
+    <div className="w-full flex flex-col items-center gap-4 select-none scale-120 lg:scale-140 py-[5rem] md:relative md:translate-y-1/2 md:-top-1/4">
       {/* Swiper Track */}
       <div
         ref={trackRef}
@@ -201,7 +201,7 @@ export default function GallerySwiper() {
         onTouchStart={handleTouchStart}
         onTouchMove={handleTouchMove}
         onTouchEnd={handleTouchEnd}
-        className="w-full flex flex-row overflow-x-scroll  py-10"
+        className="w-full flex flex-row overflow-x-scroll py-10"
         style={{
           gap: GAP,
           scrollbarWidth: "none",
@@ -216,20 +216,15 @@ export default function GallerySwiper() {
           return (
             <figure
               key={img.id}
-              className="relative flex-shrink-0 overflow-hidden rounded-2xl"
+              className="relative flex-shrink-0  scale-125 rounded-2xl"
               style={{
+                zIndex: isActive ? "2" : "0",
                 aspectRatio: "1 / 1",
                 width: isActive ? CARD_ACTIVE : CARD_INACTIVE,
-                opacity: isActive ? 1 : 0.52,
+                opacity: isActive ? 1 : 0.1,
                 transform: isActive
                   ? "scale(1) translateY(0px)"
                   : "scale(0.93) translateY(8px)",
-                boxShadow: isActive
-                  ? "0 24px 64px rgba(0,0,0,0.45)"
-                  : "0 6px 18px rgba(0,0,0,0.2)",
-                outline: isActive
-                  ? "2px solid rgba(255,255,255,0.5)"
-                  : "2px solid transparent",
                 transition: [
                   "width 0.45s cubic-bezier(0.34,1.56,0.64,1)",
                   "opacity 0.35s ease",
@@ -257,12 +252,7 @@ export default function GallerySwiper() {
 
               {/* Magnetic glow ring on active */}
               {isActive && (
-                <div
-                  className="absolute inset-0 rounded-2xl pointer-events-none"
-                  style={{
-                    boxShadow: "inset 0 0 0 2px rgba(255,255,255,0.25)",
-                  }}
-                />
+                <div className="absolute inset-0 rounded-2xl pointer-events-none" />
               )}
 
               {/* Label overlay */}
@@ -273,8 +263,6 @@ export default function GallerySwiper() {
                   left: 0,
                   right: 0,
                   padding: "12px 16px",
-                  background:
-                    "linear-gradient(to top, rgba(0,0,0,0.75), transparent)",
                   color: "white",
                   fontWeight: 600,
                   fontSize: 13,

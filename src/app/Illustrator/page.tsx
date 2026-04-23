@@ -163,7 +163,7 @@ const Illustrator = () => {
             </div>
           </div>
           {/* container figure */}
-          <div className="w-full flex-1 bg-red md:w-1/2 md:h-full flex items-center bg-background-second">
+          <div className="w-full flex-1 bg-red md:w-1/2 md:h-full items-center justify-center  bg-background-second ">
             <GallerySwiper />
           </div>
         </section>
