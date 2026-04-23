@@ -5,7 +5,10 @@ import { figures } from "./illustratorData";
 import GallerySwiper from "./GallerySwiper";
 import { links } from "@/components/Footer/footerData";
 
+const instagram = links.find((_, index) => index === 2);
 const tiktok = links.find((_, index) => index === 3);
+
+const activity = [tiktok, instagram];
 
 const Illustrator = () => {
   return (
@@ -114,22 +117,48 @@ const Illustrator = () => {
                 <h1 className="text-4xl font-black">
                   See all my drawing activities on
                 </h1>
-                <Link
-                  href={`${tiktok?.href}`}
-                  target="_blank"
-                  className="bg-foreground shadow-md -translate-y-1/9 outline outline-background-second/50 -rotate-6 text-background-second flex items-center gap-1.5 w-max p-2 rounded-xl"
-                >
-                  <figure className="h-14 aspect-square shadow-md rounded-md relative">
-                    <Image
-                      className="object-cover p-1.5"
-                      src={`${tiktok?.src}`}
-                      alt="Foto Profil"
-                      fill
-                      unoptimized
-                    />
-                  </figure>
-                  <span className="font-black"> {tiktok?.nameContent}</span>
-                </Link>
+                <div className="w-full flex flex-wrap">
+                  {activity.map((items, index) => {
+                    let link = "";
+                    let figure = "";
+
+                    if (index === 0) {
+                      link =
+                        "-translate-y-1/8 bg-footer -rotate-4 text-always-foreground";
+                      figure = "bg-footerv2";
+                    }
+                    if (index === 1) {
+                      link =
+                        "translate-y-1/8 bg-footer ml-4 rotate-4 text-always-foreground";
+                      figure = "bg-footerv2";
+                    }
+
+                    return (
+                      <Link
+                        key={index}
+                        href={`${items?.href}`}
+                        target="_blank"
+                        className={` ${link} shadow-md  outline outline-foreground/50  flex items-center gap-1.5 w-max p-2 rounded-xl`}
+                      >
+                        <figure
+                          className={`h-14 aspect-square shadow-md rounded-md relative ${figure}`}
+                        >
+                          <Image
+                            className="object-cover p-1.5"
+                            src={`${items?.src}`}
+                            alt="Foto Profil"
+                            fill
+                            unoptimized
+                          />
+                        </figure>
+                        <span className="font-black">
+                          {" "}
+                          {items?.nameContent}
+                        </span>
+                      </Link>
+                    );
+                  })}
+                </div>
               </div>
             </div>
           </div>
