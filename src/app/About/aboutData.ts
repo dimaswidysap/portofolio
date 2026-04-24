@@ -15,6 +15,11 @@ type Skill = {
   toolsLabel: string;
 };
 
+type foto = {
+  src: string;
+  alt: string;
+};
+
 export const toolsSection: readonly Skill[] = [
   {
     image: "/asset/gambar-ill/laptop.webp",
@@ -56,5 +61,20 @@ export const gallery: readonly bluePrint[] = [
   {
     name: "Beach",
     src: "/asset/owner-pic/cat.jpeg",
+  },
+] as const;
+
+export const fotos: readonly foto[] = [
+  {
+    src: "/asset/owner-pic/superman.jpg",
+    alt: "foto-first",
+  },
+  {
+    src: "/asset/owner-pic/batman.jpg",
+    alt: "foto-second",
+  },
+  {
+    src: "/asset/owner-pic/my-foto.jpg",
+    alt: "foto-second",
   },
 ] as const;
