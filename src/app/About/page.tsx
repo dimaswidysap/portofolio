@@ -112,7 +112,7 @@ const AboutMe = () => {
           </div>
         </section>
         {/* page two */}
-        <section className="relative z-2 w-full max-w-7xl  mt-[20rem] flex flex-col md:flex-row gap-2 m-auto pb-[20rem]">
+        <section className="relative  z-2 w-full max-w-7xl  mt-[20rem] flex flex-col md:flex-row gap-2 m-auto pb-[10rem]">
           {toolsSection.map((item, index) => {
             return (
               <div
@@ -162,7 +162,7 @@ const AboutMe = () => {
           })}
         </section>
         {/* page three (experinces) */}
-        <section className="w-full  -translate-y-1/5 relative max-w-7xl ">
+        <section className="w-full   relative max-w-7xl ">
           <WorkExperienceTimeline />
         </section>
       </section>

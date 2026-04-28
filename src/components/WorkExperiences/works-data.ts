@@ -15,11 +15,8 @@ export const workExperiences: WorkExperience[] = [
         period: "2024 - Now",
         location: "Jawa Timur, Indonesia",
         skills: [
-            "Next.js & React untuk SSR dan SPA",
-            "TypeScript untuk type-safety di seluruh codebase",
-            "Tailwind CSS untuk rapid UI development",
-            "REST API & GraphQL integration",
-            "Code review dan mentoring junior developer",
+            "Adobe Illustrator",
+            "Infinite Design"
         ],
     },
     {
@@ -29,11 +26,8 @@ export const workExperiences: WorkExperience[] = [
         period: "May 2023 – September 2023",
         location: "Jawa Timur, Indonesia",
         skills: [
-            "Next.js & React untuk SSR dan SPA",
-            "TypeScript untuk type-safety di seluruh codebase",
-            "Tailwind CSS untuk rapid UI development",
-            "REST API & GraphQL integration",
-            "Code review dan mentoring junior developer",
+            "Installation and configuration of customer Wi-Fi networks using fiber optic infrastructure",
+            "Installation and setup of customer Wi-Fi networks using LAN cabling",
         ],
     },
     // {

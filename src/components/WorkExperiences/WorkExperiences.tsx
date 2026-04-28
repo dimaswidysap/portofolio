@@ -158,8 +158,8 @@ export default function WorkExperienceTimeline() {
                                                 ▾
                                             </span>
                                             {isActive
-                                                ? "Tutup detail"
-                                                : `${exp.skills.length} skill · lihat detail`}
+                                                ? "Close details"
+                                                : `${exp.skills.length} skill · View details`}
                                         </div>
                                     </div>
                                 </div>
