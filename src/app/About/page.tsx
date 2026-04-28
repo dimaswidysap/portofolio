@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { gallery, toolsSection, fotos } from "./aboutData";
+import WorkExperienceTimeline from "@/components/WorkExperiences/WorkExperiences";
 const AboutMe = () => {
   return (
     <main className="w-full overflow-hidden">
@@ -159,6 +160,10 @@ const AboutMe = () => {
               </div>
             );
           })}
+        </section>
+        {/* page three (experinces) */}
+        <section className="w-full  -translate-y-1/5 relative max-w-7xl ">
+          <WorkExperienceTimeline />
         </section>
       </section>
     </main>
