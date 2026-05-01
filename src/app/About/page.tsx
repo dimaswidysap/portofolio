@@ -47,7 +47,7 @@ const AboutMe = () => {
         </section>
       </section>
       {/* page less container*/}
-      <section className="w-full bg-background relative flex flex-col items-center z-2">
+      <section className="w-full bg-background relative flex flex-col items-center z-2 border-t-2 border-foreground">
         <section className="w-full  relative max-w-7xl">
           <div className="translate-y-1/4 relative outline outline-foreground z-2 w-full max-w-[40rem] m-auto px-2 bg-background-second py-3 rounded-2xl shadow-md">
             <h1 className="font-black text-2xl">
