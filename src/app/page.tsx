@@ -32,7 +32,7 @@ export default function Home() {
               WIDY
             </h1>
             <h1 className=" font-black text-2xl mt-4 md:text-5xl opacity-50">
-              I'm Creative Person.
+              I&apos;m Creative Person.
             </h1>
             {/* Btn CV */}
             <Link
