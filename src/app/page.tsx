@@ -14,6 +14,8 @@ export default function Home() {
     offset: ["start end", "end start"],
   });
 
+  // tes
+
   const y = useTransform(scrollYProgress, [0, 1], [100, -100]);
   const sayapKanan = useTransform(scrollYProgress, [0, 1], ["0deg", "45deg"]);
   const sayapKiri = useTransform(scrollYProgress, [0, 1], ["0deg", "-45deg"]);
