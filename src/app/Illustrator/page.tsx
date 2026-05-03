@@ -1,4 +1,6 @@
 "use client";
+import { motion, useScroll, useTransform } from "framer-motion";
+import { useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { figures } from "./illustratorData";
@@ -11,8 +13,41 @@ const tiktok = links.find((_, index) => index === 3);
 const activity = [tiktok, instagram];
 
 const Illustrator = () => {
+
+  const targetRef = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: targetRef,
+    offset: ["start end", "end start"],
+  });
+
+  const targetRefv2 = useRef(null);
+  // Gunakan ":" untuk membuat alias agar tidak bentrok dengan variabel pertama
+  const { scrollYProgress: scrollYProgressv2 } = useScroll({
+    target: targetRefv2,
+    offset: ["start end", "end start"],
+  });
+
+  const figureKiri = useTransform(scrollYProgress, [0, 1], ["0", "-45rem"]);
+  const figureKanan = useTransform(scrollYProgress, [0, 1], ["0", "45rem"]);
+  const containerScale = useTransform(scrollYProgress, [0, 1], [0.7, 2]);
+
+
+  const figurePageTwo = useTransform(
+    scrollYProgressv2,
+    [0, 1],
+    ["10rem", "0rem"]
+  );
+  const figurePageTwoScale = useTransform(
+    scrollYProgressv2,
+    [0, 1],
+    [0.7, 1.1]
+  );
+
+
+
+
   return (
-    <main className="w-full">
+    <main ref={targetRef} className="w-full">
       {/* page one */}
       <section className="relative w-full h-[210vh] overflow-hidden">
         <div className="absolute h-screen w-full max-w-7xl inset-0 left-1/2 -translate-x-1/2  z-4 flex justify-center items-start">
@@ -48,12 +83,13 @@ const Illustrator = () => {
           />
         </figure>
         {/*  */}
-        <div className="absolute inset-0 h-screen w-full z-3 flex justify-center lg:justify-between items-end gap-1.5 ">
+        <motion.div style={{ scale: containerScale }} className="absolute inset-0 h-screen w-full z-3 flex justify-center lg:justify-between items-end gap-1.5 ">
           {figures.map((items, index) => {
             return (
-              <figure
+              <motion.figure
+                style={{ x: index === 0 ? figureKiri : figureKanan }}
                 key={items.alt}
-                className={`${index === 0 ? "translate-x-1/5" : "-translate-x-1/3"}  h-[70%] aspect-square relative`}
+                className={`${index === 0 ? "translate-x-[60%] md:translate-x-1/2" : "-translate-x-[60%] md:-translate-x-1/2"}  h-[70%] aspect-square relative`}
               >
                 <Image
                   className="object-cover lg:scale-105"
@@ -62,12 +98,12 @@ const Illustrator = () => {
                   fill
                   unoptimized
                 />
-              </figure>
+              </motion.figure>
             );
           })}
-        </div>
-        <div className="absolute bottom-0 h-screen w-full">
-          <figure className="absolute inset-0 h-full w-full">
+        </motion.div>
+        <div ref={targetRefv2} className="absolute bottom-0 h-screen w-full">
+          <motion.figure className="absolute inset-0 h-full w-full">
             <Image
               className="object-cover"
               src="/asset/gambar-ill/bg-fight.webp"
@@ -75,9 +111,9 @@ const Illustrator = () => {
               fill
               unoptimized
             />
-          </figure>
+          </motion.figure>
           <div className="absolute h-full w-full flex justify-center">
-            <figure className="h-full aspect-square relative z-3 scale-110 -translate-y-10">
+            <motion.figure style={{ y: figurePageTwo, scale: figurePageTwoScale }} className="h-full aspect-square relative z-3 scale-110 -translate-y-10">
               <Image
                 className="object-cover"
                 src="/asset/gambar-ill/mark.webp"
@@ -85,7 +121,7 @@ const Illustrator = () => {
                 fill
                 unoptimized
               />
-            </figure>
+            </motion.figure>
           </div>
         </div>
       </section>
@@ -100,7 +136,6 @@ const Illustrator = () => {
         </span>
       </section>
       {/* third page */}
-
       <section className="w-full h-[50rem] flex justify-center overflow-hidden bg-background-second">
         <section className="w-full h-full max-w-7xl flex flex-col-reverse md:flex-row">
           {/* conatiner mocup */}
