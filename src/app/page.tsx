@@ -25,12 +25,12 @@ export default function Home() {
         <span className="inline-flex h-1/2 absolute aspect-square top-0 right-0 bg-blue-900 opacity-60 blur-[50px] rounded-full translate-x-1/2 -translate-y-1/2 scale-150 md:scale-200 lg:scale-250"></span>
         <div className="w-full relative z-2 max-w-7xl flex justify-center items-center h-screen">
           <div className="w-full px-2">
-            <p>I hope I become the man I want to be.</p>
-            <h1 className=" font-black text-2xl md:text-5xl">
-              DIMAS WIDY SAPUTRA
+            <p className="text-[10px] md:text-2xl">Hello 👋, My name is</p>
+            <h1 className=" font-black text-6xl md:text-[150px]">
+              WIDY
             </h1>
             <h1 className=" font-black text-2xl mt-4 md:text-5xl opacity-50">
-              Creative Person.
+              I'm Creative Person.
             </h1>
             {/* Btn CV */}
             <Link
@@ -157,7 +157,7 @@ export default function Home() {
               <div className="relative w-full h-full rounded-md overflow-hidden">
                 <Image
                   className="object-cover"
-                  src="/asset/owner-pic/personv2.png"
+                  src="/asset/owner-pic/1.jpeg"
                   alt="Random"
                   fill
                   unoptimized
