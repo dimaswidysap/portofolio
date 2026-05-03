@@ -40,7 +40,7 @@ const Illustrator = () => {
   const figurePageTwoScale = useTransform(
     scrollYProgressv2,
     [0, 1],
-    [0.7, 1.3]
+    [0.7, 1.1]
   );
 
 
