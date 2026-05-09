@@ -74,7 +74,7 @@ const NavBar = () => {
   };
 
   return (
-    <header className="w-full fixed inset-0 flex justify-center bg-background-second h-max shadow-md z-50">
+    <header className="w-full fixed inset-0 flex justify-center bg-background-second/90 backdrop-blur-md h-max shadow-md z-50">
       <nav
         ref={containerRef}
         className="relative flex justify-between items-center w-full h-max max-w-7xl px-4 md:px-2 py-4 md:py-5"

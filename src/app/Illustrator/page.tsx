@@ -30,6 +30,7 @@ const Illustrator = () => {
   const figureKiri = useTransform(scrollYProgress, [0, 1], ["0", "-45rem"]);
   const figureKanan = useTransform(scrollYProgress, [0, 1], ["0", "45rem"]);
   const containerScale = useTransform(scrollYProgress, [0, 1], [0.7, 2]);
+  const textScale = useTransform(scrollYProgress, [0, 1], [0.7, 2]);
 
 
   const figurePageTwo = useTransform(
@@ -44,6 +45,10 @@ const Illustrator = () => {
   );
 
 
+  const heroTeks = "ILLUSTRATOR";
+
+
+
 
 
   return (
@@ -51,17 +56,21 @@ const Illustrator = () => {
       {/* page one */}
       <section className="relative w-full h-[210vh] overflow-hidden">
         <div className="absolute h-screen w-full max-w-7xl inset-0 left-1/2 -translate-x-1/2  z-4 flex justify-center items-start">
-          <span className="mt-[10rem] md:mt-[15rem] relative text-always-foreground">
-            <p className="absolute left-1/2 -translate-x-1/2 -top-1/2 font-black">
+          <motion.span style={{ scale: textScale }} className="mt-[10rem] md:mt-[15rem] scale-80 md:scale-100 relative text-always-foreground inline-flex justify-center items-center">
+            <p className="absolute -top-[2rem]  font-black">
               BEST
             </p>
-            <h1 className="font-black  text-5xl lg:text-7xl text-shadow-2xs">
-              ILLUSTRATOR
+            <h1 className="font-black flex gap-2 text-5xl lg:text-7xl text-shadow-2xs">
+              {heroTeks.split('').map((item, index) => {
+                return (
+                  <span key={index} className={`inline-block transform origin-center ${index % 2 === 0 ? "rotate-2  outline-2 outline-always-foreground" : "-rotate-5"} `}>{item}</span>
+                )
+              })}
             </h1>
-            <p className="absolute left-1/2 -translate-x-1/2 top-1/1 font-black">
+            <p className="absolute -bottom-[2rem] font-black">
               I MAKE.
             </p>
-          </span>
+          </motion.span>
         </div>
         <figure className="absolute inset-0 w-full h-screen">
           <Image
@@ -203,7 +212,7 @@ const Illustrator = () => {
           </div>
         </section>
       </section>
-    </main>
+    </main >
   );
 };
 
