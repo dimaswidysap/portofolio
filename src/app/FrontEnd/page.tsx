@@ -49,13 +49,13 @@ const FrontEnd = () => {
                 className="bg-background-second shadow-md flex gap-2 py-2 px-1 rounded-md"
                 href={`/project/${displayProject?.title}`}
               >
-                <span className="font-black">Repositori</span>
+                <span className="font-black">See Project</span>
                 <Files className="text-blue-700" />
               </Link>
               <Link
                 className="bg-background-second shadow-md flex gap-2 py-2 px-1 rounded-md"
                 target="_blank"
-                href={`${displayProject?.linkRep}`}
+                href={`${displayProject?.linkDemo}`}
               >
                 <span className="font-black">Live Demo</span>
                 <Globe className="text-blue-700" />

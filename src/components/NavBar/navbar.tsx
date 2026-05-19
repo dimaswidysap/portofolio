@@ -66,7 +66,7 @@ const NavBar = () => {
 
     // 2. Logika Khusus: Jika kita berada di dalam rute /project/...
     // dan link yang sedang dicek adalah /FrontEnd, maka buat dia aktif.
-    if (href === '/FrontEnd' && pathname.startsWith('/project/')) {
+    if (href === "/FrontEnd" && pathname.startsWith("/project/")) {
       return "bg-blue-700";
     }
 
@@ -88,20 +88,19 @@ const NavBar = () => {
         </Link>
 
         <div className="flex gap-4 items-center">
-          <ul className=" gap-2 hidden md:flex">
+          <ul className="gap-2 hidden md:flex">
             {linkMain.map((item) => (
               <li key={item.name}>
                 <Link
-                  className={`${getActiveColor(item.href)} font-bold flex items-center gap-2 w-max text-sm shadow-md bg-background py-0.5 px-1 rounded-sm`}
+                  className={`${getActiveColor(item.href)} font-bold flex items-center justify-center gap-2 w-max text-sm shadow-md bg-background py-0.5 px-1 rounded-sm leading-none`}
                   href={item.href}
                 >
                   {item.name === "Illustrator" ? (
-                    <PenTool size={15} />
+                    <PenTool size={15} className="shrink-0" />
                   ) : (
-                    <Terminal size={15} />
+                    <Terminal size={15} className="shrink-0" />
                   )}
-
-                  <span>{item.name}</span>
+                  <span className="leading-none">{item.name}</span>
                 </Link>
               </li>
             ))}
@@ -115,20 +114,22 @@ const NavBar = () => {
         </div>
 
         <section
-          className={`${open ? "translate-x-0 opacity-100" : "translate-x-full opacity-0"
-            }  absolute p-1.5 top-full right-0 mt-1.5 rounded-xl shadow-md bg-footer transition-all duration-200 ease-in-out`}
+          className={`${
+            open ? "translate-x-0 opacity-100" : "translate-x-full opacity-0"
+          }  absolute p-1.5 top-full right-0 mt-1.5 rounded-xl shadow-md bg-footer transition-all duration-200 ease-in-out`}
         >
           <div className="w-full h-full bg-background-second rounded-md flex flex-col px-3 py-1">
             <ul className="flex w-full items-start gap-4 flex-col pb-4">
               {navLinks.map((item) => (
                 <li
                   key={item.name}
-                  className={`${item.name === "Beranda" ||
+                  className={`${
+                    item.name === "Beranda" ||
                     item.name === "Illustrator" ||
                     item.name === "Front-End"
-                    ? "md:hidden"
-                    : "flex"
-                    }`}
+                      ? "md:hidden"
+                      : "flex"
+                  }`}
                 >
                   <Link
                     onClick={() => setOpen(false)}
