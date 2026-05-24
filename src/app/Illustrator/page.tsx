@@ -13,7 +13,6 @@ const tiktok = links.find((_, index) => index === 3);
 const activity = [tiktok, instagram];
 
 const Illustrator = () => {
-
   const targetRef = useRef(null);
   const { scrollYProgress } = useScroll({
     target: targetRef,
@@ -32,44 +31,42 @@ const Illustrator = () => {
   const containerScale = useTransform(scrollYProgress, [0, 1], [0.7, 2]);
   const textScale = useTransform(scrollYProgress, [0, 1], [0.7, 2]);
 
-
   const figurePageTwo = useTransform(
     scrollYProgressv2,
     [0, 1],
-    ["10rem", "0rem"]
+    ["10rem", "0rem"],
   );
   const figurePageTwoScale = useTransform(
     scrollYProgressv2,
     [0, 1],
-    [0.7, 1.1]
+    [0.7, 1.1],
   );
 
-
   const heroTeks = "ILLUSTRATOR";
-
-
-
-
 
   return (
     <main ref={targetRef} className="w-full">
       {/* page one */}
       <section className="relative w-full h-[210vh] overflow-hidden">
         <div className="absolute h-screen w-full max-w-7xl inset-0 left-1/2 -translate-x-1/2  z-4 flex justify-center items-start">
-          <motion.span style={{ scale: textScale }} className="mt-[10rem] md:mt-[15rem] scale-80 md:scale-100 relative text-always-foreground inline-flex justify-center items-center">
-            <p className="absolute -top-[2rem]  font-black">
-              BEST
-            </p>
+          <motion.span
+            style={{ scale: textScale }}
+            className="mt-[10rem] md:mt-[15rem] scale-80 md:scale-100 relative text-always-foreground inline-flex justify-center items-center"
+          >
+            <p className="absolute -top-[2rem]  font-black">BEST</p>
             <h1 className="font-black flex gap-2 text-5xl lg:text-7xl text-shadow-2xs">
-              {heroTeks.split('').map((item, index) => {
+              {heroTeks.split("").map((item, index) => {
                 return (
-                  <span key={index} className={`inline-block transform origin-center ${index % 2 === 0 ? "rotate-2  outline-2 outline-always-foreground" : "-rotate-5"} `}>{item}</span>
-                )
+                  <span
+                    key={index}
+                    className={`inline-block transform origin-center ${index % 2 === 0 ? "rotate-2  outline-2 outline-always-foreground" : "-rotate-5"} `}
+                  >
+                    {item}
+                  </span>
+                );
               })}
             </h1>
-            <p className="absolute -bottom-[2rem] font-black">
-              I MAKE.
-            </p>
+            <p className="absolute -bottom-[2rem] font-black">I MAKE.</p>
           </motion.span>
         </div>
         <figure className="absolute inset-0 w-full h-screen">
@@ -92,7 +89,10 @@ const Illustrator = () => {
           />
         </figure>
         {/*  */}
-        <motion.div style={{ scale: containerScale }} className="absolute inset-0 h-screen w-full z-3 flex justify-center lg:justify-between items-end gap-1.5 ">
+        <motion.div
+          style={{ scale: containerScale }}
+          className="absolute inset-0 h-screen w-full z-3 flex justify-center lg:justify-between items-end gap-1.5 "
+        >
           {figures.map((items, index) => {
             return (
               <motion.figure
@@ -122,7 +122,10 @@ const Illustrator = () => {
             />
           </motion.figure>
           <div className="absolute h-full w-full flex justify-center">
-            <motion.figure style={{ y: figurePageTwo, scale: figurePageTwoScale }} className="h-full aspect-square relative z-3 scale-110 -translate-y-10">
+            <motion.figure
+              style={{ y: figurePageTwo, scale: figurePageTwoScale }}
+              className="h-full aspect-square relative z-3 scale-110 -translate-y-10"
+            >
               <Image
                 className="object-cover"
                 src="/asset/gambar-ill/mark.webp"
@@ -212,7 +215,7 @@ const Illustrator = () => {
           </div>
         </section>
       </section>
-    </main >
+    </main>
   );
 };
 

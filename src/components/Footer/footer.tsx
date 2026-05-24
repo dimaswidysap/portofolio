@@ -18,6 +18,7 @@ const Footer = () => {
 
           <div className="flex gap-4 mt-3">
             {links.map((items) => {
+              const Icon = items.Icon;
               return (
                 <Link
                   target="_blank"
@@ -25,13 +26,7 @@ const Footer = () => {
                   key={items.name}
                   href={items.href}
                 >
-                  <Image
-                    className="object-cover p-1.5"
-                    src={items.src}
-                    alt="Foto Profil"
-                    fill
-                    unoptimized
-                  />
+                  <Icon className="w-full h-full" />
                 </Link>
               );
             })}

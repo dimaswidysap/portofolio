@@ -1,15 +1,29 @@
+"use client";
+import { motion, useScroll, useTransform } from "framer-motion";
+
 import Image from "next/image";
 import { gallery, toolsSection, fotos } from "./aboutData";
 import WorkExperienceTimeline from "@/components/WorkExperiences/WorkExperiences";
 const AboutMe = () => {
+  const { scrollYProgress } = useScroll();
+
+  const conPictures = useTransform(
+    scrollYProgress,
+    [0, 0.3],
+    ["0rem", "-10rem"],
+  );
   return (
     <main className="w-full overflow-hidden">
       {/* margin */}
       <div className="w-full h-screen"></div>
       {/* page one */}
       <section className="fixed inset-0 bg-red w-full h-screen flex justify-center items-center">
+        {/* container pictures */}
         <section className="relative z-2 w-full max-w-7xl h-screen flex justify-center items-center">
-          <section className="w-[90%] h-[90%] max-h-[30rem] lg:w-[60%] flex flex-wrap p-2 ">
+          <motion.section
+            style={{ y: conPictures }}
+            className="w-[90%] h-[90%] max-h-[30rem] lg:w-[60%] flex flex-wrap p-2 "
+          >
             {fotos.map((item, index) => {
               let style = "";
 
@@ -39,11 +53,12 @@ const AboutMe = () => {
                 </figure>
               );
             })}
-          </section>
+          </motion.section>
         </section>
-        <section className="absolute h-screen w-full">
-          <span className="inline-flex h-[80%] aspect-square bg-blue-700 absolute top-0 left-0 -translate-x-1/2 -translate-y-1/2 rounded-full blur-[60px] opacity-40"></span>
-          <span className="inline-flex h-[80%] aspect-square bg-blue-700 absolute bottom-0 right-0 translate-x-1/2 translate-y-1/2 rounded-full blur-[60px] opacity-40"></span>
+        {/* container circle blur */}
+        <section className="absolute h-screen w-full flex justify-center items-center">
+          <span className="absolute inline-flex h-[50%] aspect-square bg-foreground rounded-full blur-[60px] opacity-40 -translate-x-[60%]"></span>
+          <span className="absolute inline-flex h-[50%] aspect-square bg-foreground rounded-full blur-[60px] opacity-40 translate-x-[40%] translate-y-[20%]"></span>
         </section>
       </section>
       {/* page less container*/}
@@ -142,15 +157,24 @@ const AboutMe = () => {
                         key={index}
                         className="flex gap-1.5 items-center bg-background-second p-1 rounded-full shadow-2xl"
                       >
-                        <div className="h-14 aspect-square bg-always-foreground rounded-full relative">
-                          <Image
-                            loading="lazy"
-                            className="object-cover p-3"
-                            src={`/asset/icon/${icon.iconSrc}`}
-                            alt={icon.name}
-                            fill
-                            unoptimized
-                          />
+                        <div className="h-14 aspect-square bg-always-foreground/20 rounded-full relative">
+                          {(() => {
+                            const toolIcon = icon.icon;
+                            if (toolIcon.type === "component") {
+                              const Icon = toolIcon.component;
+                              return <Icon className="w-full h-full p-3" />;
+                            }
+                            return (
+                              <Image
+                                loading="lazy"
+                                className="object-cover p-3"
+                                src={`/asset/icon/${toolIcon.src}`}
+                                alt={icon.name}
+                                fill
+                                unoptimized
+                              />
+                            );
+                          })()}
                         </div>
                         <span className="pr-2 font-semibold">{icon.name}</span>
                       </figure>

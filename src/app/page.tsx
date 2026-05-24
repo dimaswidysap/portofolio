@@ -6,6 +6,8 @@ import Image from "next/image";
 import { garuda } from "./Illustrator/illustratorData";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
+import { VisualStudioCode } from "@/components/icons/vscode";
+import { Illustrator } from "@/components/icons/adobeIllustrator";
 
 export default function Home() {
   const targetRef = useRef(null);
@@ -28,9 +30,7 @@ export default function Home() {
         <div className="w-full relative z-2 max-w-7xl flex justify-center items-center h-screen">
           <div className="w-full px-2">
             <p className="text-[10px] md:text-2xl">Hello 👋, My name is</p>
-            <h1 className=" font-black text-6xl md:text-[150px]">
-              WIDY
-            </h1>
+            <h1 className=" font-black text-6xl md:text-[150px]">WIDY</h1>
             <h1 className=" font-black text-2xl mt-4 md:text-5xl opacity-50">
               I&apos;m Creative Person.
             </h1>
@@ -106,22 +106,10 @@ export default function Home() {
             </div>
             <div className="w-full h-1/2 absolute inset-0">
               <figure className="absolute h-32 aspect-square rotate-12 mt-4">
-                <Image
-                  className="object-cover"
-                  src="/asset/icon/illustrator.png"
-                  alt="icon-adobe-illustrator"
-                  fill
-                  unoptimized
-                />
+                <Illustrator className="object-cover" />
               </figure>
               <figure className="absolute right-0 top-[15rem] h-32 aspect-square -rotate-12 mt-4">
-                <Image
-                  className="object-cover"
-                  src="/asset/icon/vscode.svg"
-                  alt="icon-vscode"
-                  fill
-                  unoptimized
-                />
+                <VisualStudioCode className="object-cover" />
               </figure>
             </div>
           </section>
