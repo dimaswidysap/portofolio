@@ -6,6 +6,8 @@ import Link from "next/link";
 import { figures } from "./illustratorData";
 import GallerySwiper from "./GallerySwiper";
 import { links } from "@/components/Footer/footerData";
+import { TikTok } from "@/components/icons/tiktok";
+import { Instagram } from "@/components/icons/instagram";
 
 const instagram = links.find((_, index) => index === 2);
 const tiktok = links.find((_, index) => index === 3);
@@ -180,7 +182,6 @@ const Illustrator = () => {
                       figure = "bg-footerv2";
                     }
 
-                    const Icon = items.Icon;
                     return (
                       <Link
                         key={index}
@@ -191,7 +192,11 @@ const Illustrator = () => {
                         <figure
                           className={`h-14 aspect-square shadow-md rounded-md relative ${figure}`}
                         >
-                          <Icon className="w-full h-full" />
+                          {items?.name === "icon-tiktok" ? (
+                            <TikTok className="w-full h-full" />
+                          ) : (
+                            <Instagram className="w-full h-full" />
+                          )}
                         </figure>
                         <span className="font-black">
                           {" "}
