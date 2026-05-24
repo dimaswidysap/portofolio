@@ -180,6 +180,7 @@ const Illustrator = () => {
                       figure = "bg-footerv2";
                     }
 
+                    const Icon = items.Icon;
                     return (
                       <Link
                         key={index}
@@ -190,13 +191,7 @@ const Illustrator = () => {
                         <figure
                           className={`h-14 aspect-square shadow-md rounded-md relative ${figure}`}
                         >
-                          <Image
-                            className="object-cover p-1.5"
-                            src={`${items?.src}`}
-                            alt="Foto Profil"
-                            fill
-                            unoptimized
-                          />
+                          <Icon className="w-full h-full" />
                         </figure>
                         <span className="font-black">
                           {" "}

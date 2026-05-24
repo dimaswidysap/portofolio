@@ -1,5 +1,4 @@
 import React from "react";
-import Link from "next/link"; // Pastikan Link di-import jika pakai Next.js
 import { GitHub } from "./../icons/github";
 import { Gmail } from "./../icons/gmail";
 import { Instagram } from "./../icons/instagram";
