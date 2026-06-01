@@ -30,10 +30,10 @@ export default function Home() {
         <div className="w-full relative z-2 max-w-7xl flex justify-center items-center h-screen">
           <div className="w-full px-2">
             <p className="text-[10px] md:text-2xl">Hello 👋, My name is</p>
-            <h1 className=" font-black text-6xl md:text-[150px]">WIDY</h1>
-            <h1 className=" font-black text-2xl mt-4 md:text-5xl opacity-50">
+            <h1 className="font-black text-6xl md:text-[150px]">WIDY</h1>          {/* ← 1 h1 saja */}
+            <h2 className="font-black text-2xl mt-4 md:text-5xl opacity-50">        {/* ← h2 */}
               I&apos;m Creative Person.
-            </h1>
+            </h2>
             {/* Btn CV */}
             <Link
               target="_blank"
@@ -53,7 +53,9 @@ export default function Home() {
         {/* container garuda */}
         <section ref={targetRef} className="h-200 w-full  flex justify-center">
           <motion.div
-            style={{ y }}
+
+            style={{ y, willChange: "transform" }}
+
             className="h-full relative aspect-video md:-translate-x-[20%] lg:-translate-x-[30%]"
           >
             {garuda.map((items, index) => {
@@ -69,7 +71,7 @@ export default function Home() {
 
               return (
                 <motion.figure
-                  style={style}
+                  style={{ ...style, willChange: "transform" }}
                   key={items.alt}
                   className="w-full h-full absolute"
                 >
@@ -78,7 +80,8 @@ export default function Home() {
                     src={items.src}
                     alt={items.alt}
                     fill
-                    unoptimized
+                    loading="lazy"
+                    sizes="(max-width: 768px) 100vw, 50vw"
                   />
                 </motion.figure>
               );
@@ -94,15 +97,15 @@ export default function Home() {
           {/* konten */}
           <section className="absolute inset-0 h-full w-full pt-24">
             <div className="w-full relative z-2">
-              <h1 className="w-full flex justify-start px-2.5 font-black text-5xl text-always-foreground">
+              <h2 className="w-full flex justify-start px-2.5 font-black text-5xl text-always-foreground">
                 Illustrator
-              </h1>
+              </h2>
               <h5 className="w-full flex justify-center text-always-foreground">
                 and
               </h5>
-              <h1 className="w-full flex justify-end px-2.5 font-black text-5xl text-always-foreground">
+              <h2 className="w-full flex justify-end px-2.5 font-black text-5xl text-always-foreground">
                 Front-End
-              </h1>
+              </h2>
             </div>
             <div className="w-full h-1/2 absolute inset-0">
               <figure className="absolute h-32 aspect-square rotate-12 mt-4">
@@ -117,16 +120,17 @@ export default function Home() {
 
         {/* konten front-end */}
 
-        <section className="absolute flex-col h-full w-full inset-0 flex items-center justify-end items-end pb-20 md:pr-4">
+        <section className="absolute flex-col h-full w-full inset-0 flex  justify-end items-end pb-20 md:pr-4">
           {/* konten 1 */}
           <figure className="relative z-10 rounded-2xl shadow-2xl w-[90%] md:w-[70%] max-w-200 aspect-video bg-background-second p-2 md:p-4">
             <div className="relative w-full h-full  rounded-md overflow-hidden">
               <Image
-                className="object-cover"
+                className="object-cover "
                 src="/asset/owner-pic/coding.png"
-                alt="Random"
+                alt="Widy sedang coding di VS Code"
                 fill
-                unoptimized
+                priority
+                sizes="(max-width: 768px) 100vw, 70vw"
               />
             </div>
           </figure>
@@ -137,9 +141,10 @@ export default function Home() {
                 <Image
                   className="object-cover"
                   src="/asset/owner-pic/profil-github.png"
-                  alt="Random"
+                  alt="Profil GitHub Widy"
                   fill
-                  unoptimized
+                  loading="lazy"
+                  sizes="(max-width: 768px) 50vw, 30vw"
                 />
               </div>
             </figure>
@@ -148,8 +153,9 @@ export default function Home() {
                 <Image
                   className="object-cover"
                   src="/asset/owner-pic/1.jpeg"
-                  alt="Random"
+                  alt="Widy Sedang Menggabanr Illustrasi"
                   fill
+                  loading="lazy"
                   unoptimized
                 />
               </div>
