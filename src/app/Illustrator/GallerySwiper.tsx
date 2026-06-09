@@ -1,16 +1,100 @@
 "use client";
 import { images } from "./illustratorData";
-import { useRef, useState, useCallback, useEffect } from "react";
+import { useRef, useState, useCallback, useEffect, memo } from "react";
 
 const CARD_ACTIVE = 280;
 const CARD_INACTIVE = 240;
 const GAP = 12;
 
+// ── Pre-computed static styles (created once, not per-render) ─────────────
+const INACTIVE_FIGURE_STYLE: React.CSSProperties = {
+  zIndex: 0,
+  aspectRatio: "1 / 1",
+  width: CARD_INACTIVE,
+  opacity: 0.1,
+  transform: "scale(0.93) translateY(8px)",
+  transition: [
+    "width 0.45s cubic-bezier(0.34,1.56,0.64,1)",
+    "opacity 0.35s ease",
+    "transform 0.45s cubic-bezier(0.34,1.56,0.64,1)",
+  ].join(", "),
+};
+
+const ACTIVE_FIGURE_STYLE: React.CSSProperties = {
+  zIndex: 2,
+  aspectRatio: "1 / 1",
+  width: CARD_ACTIVE,
+  opacity: 1,
+  transform: "scale(1) translateY(0px)",
+  transition: [
+    "width 0.45s cubic-bezier(0.34,1.56,0.64,1)",
+    "opacity 0.35s ease",
+    "transform 0.45s cubic-bezier(0.34,1.56,0.64,1)",
+  ].join(", "),
+};
+
+const INACTIVE_IMG_STYLE: React.CSSProperties = {
+  width: "100%",
+  height: "100%",
+  objectFit: "cover",
+  transform: "scale(1.05)",
+  transition: "transform 0.5s ease",
+  pointerEvents: "none",
+  display: "block",
+};
+
+const ACTIVE_IMG_STYLE: React.CSSProperties = {
+  width: "100%",
+  height: "100%",
+  objectFit: "cover",
+  transform: "scale(1)",
+  transition: "transform 0.5s ease",
+  pointerEvents: "none",
+  display: "block",
+};
+
+// ── Memoized card — only re-renders when isActive changes ─────────────────
+const GalleryCard = memo(function GalleryCard({
+  img,
+  isActive,
+}: {
+  img: (typeof images)[number];
+  isActive: boolean;
+}) {
+  return (
+    <figure
+      className="relative flex-shrink-0 scale-125 rounded-2xl overflow-hidden"
+      style={isActive ? ACTIVE_FIGURE_STYLE : INACTIVE_FIGURE_STYLE}
+    >
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        src={img.src}
+        alt={img.alt}
+        draggable={false}
+        style={isActive ? ACTIVE_IMG_STYLE : INACTIVE_IMG_STYLE}
+      />
+
+      {/* Label overlay — uses foreground color from theme */}
+      <figcaption
+        className="absolute bottom-0 left-0 right-0 text-always-foreground font-semibold uppercase tracking-widest text-[13px]"
+        style={{
+          padding: "12px 16px",
+          opacity: isActive ? 1 : 0,
+          transition: "opacity 0.35s ease",
+        }}
+      >
+        {img.label}
+      </figcaption>
+    </figure>
+  );
+});
+
+// ── Main component ────────────────────────────────────────────────────────
 export default function GallerySwiper() {
   const [activeIndex, setActiveIndex] = useState(0);
   const trackRef = useRef<HTMLDivElement>(null);
 
-  // Drag state via refs (no re-render during drag)
+  // Drag state — all refs, zero re-renders during drag
   const isDragging = useRef(false);
   const startX = useRef(0);
   const startScrollLeft = useRef(0);
@@ -19,40 +103,45 @@ export default function GallerySwiper() {
   const lastTime = useRef(0);
   const rafId = useRef<number | null>(null);
 
-  // ── Compute scrollLeft that centers card[index] ───────────────
-  const getSnapOffset = useCallback((index: number) => {
-    // With paddingLeft = calc(50% - CARD_ACTIVE/2), the first card's left edge
-    // starts at scrollLeft=0 and is already centered. Each subsequent card
-    // is offset by CARD_INACTIVE + GAP.
-    let offset = 0;
-    for (let i = 0; i < index; i++) {
-      offset += CARD_INACTIVE + GAP;
+  // Track last committed activeIndex in a ref to avoid stale closures
+  // and skip setActiveIndex when value hasn't changed
+  const activeIndexRef = useRef(0);
+
+  const setActive = useCallback((i: number) => {
+    if (activeIndexRef.current !== i) {
+      activeIndexRef.current = i;
+      setActiveIndex(i);
     }
-    return Math.max(0, offset);
   }, []);
 
-  // ── Spring animation to target scrollLeft ─────────────────────
+  // ── Snap offset ───────────────────────────────────────────────
+  const getSnapOffset = useCallback((index: number) => {
+    return Math.max(0, index * (CARD_INACTIVE + GAP));
+  }, []);
+
+  // ── Smooth scroll to target (CSS scroll-behavior would fight drag) ────
   const animateTo = useCallback((target: number) => {
     if (rafId.current) cancelAnimationFrame(rafId.current);
     const track = trackRef.current;
     if (!track) return;
+
     const step = () => {
       const diff = target - track.scrollLeft;
-      if (Math.abs(diff) < 0.4) {
+      if (Math.abs(diff) < 0.5) {
         track.scrollLeft = target;
         return;
       }
-      track.scrollLeft += diff * 0.16;
+      // Stronger lerp factor = fewer frames = less CPU on low devices
+      track.scrollLeft += diff * 0.22;
       rafId.current = requestAnimationFrame(step);
     };
     rafId.current = requestAnimationFrame(step);
   }, []);
 
-  // ── Find nearest card to current scroll center ────────────────
+  // ── Nearest card — O(n) but n is always small ─────────────────
   const getNearestIndex = useCallback(() => {
     const track = trackRef.current;
     if (!track) return 0;
-    // Account for paddingLeft = 50% - CARD_ACTIVE/2
     const paddingLeft = track.clientWidth / 2 - CARD_ACTIVE / 2;
     const scrollCenter = track.scrollLeft + track.clientWidth / 2;
     let offset = paddingLeft;
@@ -70,30 +159,34 @@ export default function GallerySwiper() {
     return nearest;
   }, []);
 
-  // ── Magnetic snap: momentum decay → snap to nearest ──────────
+  // ── Momentum → snap ───────────────────────────────────────────
+  // Key fix: setActive is only called when index actually changes,
+  // and we throttle updates so low-end devices aren't hammered.
   const applyMomentumThenSnap = useCallback(() => {
     if (rafId.current) cancelAnimationFrame(rafId.current);
     const track = trackRef.current;
     if (!track) return;
 
-    let v = velocity.current * -1; // invert direction
-    const FRICTION = 0.88;
-    const SNAP_THRESHOLD = 0.08;
+    let v = velocity.current * -1;
+    const FRICTION = 0.86; // slightly stronger friction = fewer frames
+    const SNAP_THRESHOLD = 0.1;
+    let frameCount = 0;
 
     const step = () => {
       v *= FRICTION;
       track.scrollLeft += v;
 
-      // While decelerating, continuously update active preview
-      const near = getNearestIndex();
-      setActiveIndex(near);
+      // Only recompute nearest every 3 frames — plenty smooth, far less work
+      frameCount++;
+      if (frameCount % 3 === 0) {
+        setActive(getNearestIndex());
+      }
 
       if (Math.abs(v) > SNAP_THRESHOLD) {
         rafId.current = requestAnimationFrame(step);
       } else {
-        // Magnetic pull: snap to nearest card center
         const snapped = getNearestIndex();
-        setActiveIndex(snapped);
+        setActive(snapped);
         animateTo(getSnapOffset(snapped));
       }
     };
@@ -102,13 +195,13 @@ export default function GallerySwiper() {
       rafId.current = requestAnimationFrame(step);
     } else {
       const snapped = getNearestIndex();
-      setActiveIndex(snapped);
+      setActive(snapped);
       animateTo(getSnapOffset(snapped));
     }
-  }, [getNearestIndex, animateTo, getSnapOffset]);
+  }, [getNearestIndex, animateTo, getSnapOffset, setActive]);
 
   // ── Mouse events ──────────────────────────────────────────────
-  const handleMouseDown = (e: React.MouseEvent) => {
+  const handleMouseDown = useCallback((e: React.MouseEvent) => {
     if (rafId.current) cancelAnimationFrame(rafId.current);
     isDragging.current = true;
     startX.current = e.pageX;
@@ -116,33 +209,38 @@ export default function GallerySwiper() {
     lastX.current = e.pageX;
     lastTime.current = performance.now();
     velocity.current = 0;
-  };
+    // Directly set cursor on the element — no re-render needed
+    if (trackRef.current) trackRef.current.style.cursor = "grabbing";
+  }, []);
 
-  const handleMouseMove = (e: React.MouseEvent) => {
-    if (!isDragging.current) return;
-    e.preventDefault();
-    const dx = e.pageX - startX.current;
-    if (trackRef.current)
-      trackRef.current.scrollLeft = startScrollLeft.current - dx;
+  const handleMouseMove = useCallback(
+    (e: React.MouseEvent) => {
+      if (!isDragging.current) return;
+      e.preventDefault();
+      const dx = e.pageX - startX.current;
+      if (trackRef.current)
+        trackRef.current.scrollLeft = startScrollLeft.current - dx;
 
-    const now = performance.now();
-    const dt = now - lastTime.current || 1;
-    velocity.current = (e.pageX - lastX.current) / dt;
-    lastX.current = e.pageX;
-    lastTime.current = now;
+      const now = performance.now();
+      const dt = now - lastTime.current || 1;
+      velocity.current = (e.pageX - lastX.current) / dt;
+      lastX.current = e.pageX;
+      lastTime.current = now;
 
-    // Live active preview while dragging
-    setActiveIndex(getNearestIndex());
-  };
+      setActive(getNearestIndex());
+    },
+    [getNearestIndex, setActive],
+  );
 
-  const handleMouseUp = () => {
+  const handleMouseUp = useCallback(() => {
     if (!isDragging.current) return;
     isDragging.current = false;
+    if (trackRef.current) trackRef.current.style.cursor = "grab";
     applyMomentumThenSnap();
-  };
+  }, [applyMomentumThenSnap]);
 
   // ── Touch events ──────────────────────────────────────────────
-  const handleTouchStart = (e: React.TouchEvent) => {
+  const handleTouchStart = useCallback((e: React.TouchEvent) => {
     if (rafId.current) cancelAnimationFrame(rafId.current);
     isDragging.current = true;
     startX.current = e.touches[0].pageX;
@@ -150,40 +248,42 @@ export default function GallerySwiper() {
     lastX.current = e.touches[0].pageX;
     lastTime.current = performance.now();
     velocity.current = 0;
-  };
+  }, []);
 
-  const handleTouchMove = (e: React.TouchEvent) => {
-    if (!isDragging.current) return;
-    const dx = e.touches[0].pageX - startX.current;
-    if (trackRef.current)
-      trackRef.current.scrollLeft = startScrollLeft.current - dx;
+  const handleTouchMove = useCallback(
+    (e: React.TouchEvent) => {
+      if (!isDragging.current) return;
+      const dx = e.touches[0].pageX - startX.current;
+      if (trackRef.current)
+        trackRef.current.scrollLeft = startScrollLeft.current - dx;
 
-    const now = performance.now();
-    const dt = now - lastTime.current || 1;
-    velocity.current = (e.touches[0].pageX - lastX.current) / dt;
-    lastX.current = e.touches[0].pageX;
-    lastTime.current = now;
+      const now = performance.now();
+      const dt = now - lastTime.current || 1;
+      velocity.current = (e.touches[0].pageX - lastX.current) / dt;
+      lastX.current = e.touches[0].pageX;
+      lastTime.current = now;
 
-    setActiveIndex(getNearestIndex());
-  };
+      setActive(getNearestIndex());
+    },
+    [getNearestIndex, setActive],
+  );
 
-  const handleTouchEnd = () => {
+  const handleTouchEnd = useCallback(() => {
     if (!isDragging.current) return;
     isDragging.current = false;
     applyMomentumThenSnap();
-  };
+  }, [applyMomentumThenSnap]);
 
   // ── Button navigation ─────────────────────────────────────────
   const goTo = useCallback(
     (index: number) => {
       const clamped = Math.max(0, Math.min(images.length - 1, index));
-      setActiveIndex(clamped);
+      setActive(clamped);
       animateTo(getSnapOffset(clamped));
     },
-    [animateTo, getSnapOffset],
+    [animateTo, getSnapOffset, setActive],
   );
 
-  // Center first card on mount
   useEffect(() => {
     goTo(0);
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -201,102 +301,32 @@ export default function GallerySwiper() {
         onTouchStart={handleTouchStart}
         onTouchMove={handleTouchMove}
         onTouchEnd={handleTouchEnd}
-        className="w-full flex flex-row overflow-x-scroll py-10"
+        className="w-full flex flex-row overflow-x-scroll py-10 cursor-grab"
         style={{
           gap: GAP,
           scrollbarWidth: "none",
-          cursor: isDragging.current ? "grabbing" : "grab",
-          // Padding lets first and last card be centered
           paddingLeft: `calc(50% - ${CARD_ACTIVE / 2}px)`,
           paddingRight: `calc(50% - ${CARD_ACTIVE / 2}px)`,
+          // Hint to browser: this layer scrolls horizontally — promote to GPU
+          willChange: "scroll-position",
         }}
       >
-        {images.map((img, i) => {
-          const isActive = i === activeIndex;
-          return (
-            <figure
-              key={img.id}
-              className="relative flex-shrink-0  scale-125 rounded-2xl"
-              style={{
-                zIndex: isActive ? "2" : "0",
-                aspectRatio: "1 / 1",
-                width: isActive ? CARD_ACTIVE : CARD_INACTIVE,
-                opacity: isActive ? 1 : 0.1,
-                transform: isActive
-                  ? "scale(1) translateY(0px)"
-                  : "scale(0.93) translateY(8px)",
-                transition: [
-                  "width 0.45s cubic-bezier(0.34,1.56,0.64,1)",
-                  "opacity 0.35s ease",
-                  "transform 0.45s cubic-bezier(0.34,1.56,0.64,1)",
-                  "box-shadow 0.4s ease",
-                  "outline 0.3s ease",
-                ].join(", "),
-              }}
-            >
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src={img.src}
-                alt={img.alt}
-                draggable={false}
-                style={{
-                  width: "100%",
-                  height: "100%",
-                  objectFit: "cover",
-                  transform: isActive ? "scale(1)" : "scale(1.05)",
-                  transition: "transform 0.5s ease",
-                  pointerEvents: "none",
-                  display: "block",
-                }}
-              />
-
-              {/* Magnetic glow ring on active */}
-              {isActive && (
-                <div className="absolute inset-0 rounded-2xl pointer-events-none" />
-              )}
-
-              {/* Label overlay */}
-              <figcaption
-                style={{
-                  position: "absolute",
-                  bottom: 0,
-                  left: 0,
-                  right: 0,
-                  padding: "12px 16px",
-                  color: "white",
-                  fontWeight: 600,
-                  fontSize: 13,
-                  letterSpacing: "0.14em",
-                  textTransform: "uppercase",
-                  opacity: isActive ? 1 : 0,
-                  transition: "opacity 0.35s ease",
-                }}
-              >
-                {img.label}
-              </figcaption>
-            </figure>
-          );
-        })}
+        {images.map((img, i) => (
+          <GalleryCard key={img.id} img={img} isActive={i === activeIndex} />
+        ))}
       </div>
 
       {/* Controls */}
       <div className="flex items-center gap-4">
+        {/* Prev button */}
         <button
           onClick={() => goTo(activeIndex - 1)}
           disabled={activeIndex === 0}
           aria-label="Previous"
+          className="flex items-center justify-center rounded-full border border-foreground/30 bg-foreground/10 text-foreground cursor-pointer transition-opacity duration-200"
           style={{
             width: 36,
             height: 36,
-            borderRadius: "50%",
-            border: "1px solid rgba(255,255,255,0.3)",
-            background: "rgba(255,255,255,0.08)",
-            color: "white",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            cursor: "pointer",
-            transition: "transform 0.15s ease, opacity 0.2s ease",
             opacity: activeIndex === 0 ? 0.25 : 1,
           }}
         >
@@ -319,38 +349,30 @@ export default function GallerySwiper() {
               key={i}
               onClick={() => goTo(i)}
               aria-label={`Slide ${i + 1}`}
+              className="border-none cursor-pointer p-0 rounded-full transition-all duration-300"
               style={{
                 height: 8,
                 width: activeIndex === i ? 24 : 8,
-                borderRadius: 9999,
                 background:
-                  activeIndex === i ? "white" : "rgba(255,255,255,0.35)",
-                border: "none",
-                cursor: "pointer",
+                  activeIndex === i
+                    ? "var(--foreground)"
+                    : "color-mix(in srgb, var(--foreground) 35%, transparent)",
                 transition:
                   "width 0.4s cubic-bezier(0.34,1.56,0.64,1), background 0.3s ease",
-                padding: 0,
               }}
             />
           ))}
         </div>
 
+        {/* Next button */}
         <button
           onClick={() => goTo(activeIndex + 1)}
           disabled={activeIndex === images.length - 1}
           aria-label="Next"
+          className="flex items-center justify-center rounded-full border border-foreground/30 bg-foreground/10 text-foreground cursor-pointer transition-opacity duration-200"
           style={{
             width: 36,
             height: 36,
-            borderRadius: "50%",
-            border: "1px solid rgba(255,255,255,0.3)",
-            background: "rgba(255,255,255,0.08)",
-            color: "white",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            cursor: "pointer",
-            transition: "transform 0.15s ease, opacity 0.2s ease",
             opacity: activeIndex === images.length - 1 ? 0.25 : 1,
           }}
         >

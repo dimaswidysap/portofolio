@@ -62,12 +62,12 @@ const NavBar = () => {
 
   const getActiveColor = (href: string) => {
     // 1. Cek kecocokan eksak (Misal: sedang di /FrontEnd dan link-nya /FrontEnd)
-    if (pathname === href) return "bg-blue-700";
+    if (pathname === href) return "bg-blue-700 text-foreground dark:text-white";
 
     // 2. Logika Khusus: Jika kita berada di dalam rute /project/...
     // dan link yang sedang dicek adalah /FrontEnd, maka buat dia aktif.
     if (href === "/FrontEnd" && pathname.startsWith("/project/")) {
-      return "bg-blue-700";
+      return "bg-blue-700 text-foreground dark:text-white";
     }
 
     return "";
