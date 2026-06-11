@@ -27,11 +27,28 @@ export default function Home() {
       {/* container foto */}
       <section className="w-full h-screen flex justify-center relative overflow-hidden">
         <span className="inline-flex h-1/2 absolute aspect-square top-0 right-0 bg-blue-900 opacity-60 blur-[50px] rounded-full translate-x-1/2 -translate-y-1/2 scale-150 md:scale-200 lg:scale-250"></span>
-        <div className="w-full relative z-2 max-w-7xl flex justify-center items-center h-screen">
+        {/* container card title */}
+        <div className="lg:-translate-x-1/9 absolute h-full w-full inset-0 flex justify-end">
+          <div className="w-[90%] md:w-1/2  h-full p-2 justify-end flex items-start pt-32">
+          <figure className="flex w-[80%] md:w-full lg:w-[60%] lg:mr-20 aspect-2/3 bg-background rounded-xl p-2">
+          <div className="w-full h-full rounded-md relative overflow-hidden">
+             <Image
+                className="object-cover "
+                src="/asset/owner-pic/card-title.jpeg"
+                alt="Widy sedang coding di VS Code"
+                fill
+                priority
+                sizes="(max-width: 768px) 100vw, 70vw"
+              />
+          </div>
+          </figure>
+          </div>
+        </div>
+        <div className="lg:translate-x-1/9 w-full relative z-2 max-w-7xl flex justify-center items-end lg:items-center pb-20 md:pb-62 lg:pb-0 h-screen">
           <div className="w-full px-2">
             <p className="text-[10px] md:text-2xl">Hello 👋, My name is</p>
-            <h1 className="font-black text-6xl md:text-[150px]">WIDY</h1>          {/* ← 1 h1 saja */}
-            <h2 className="font-black text-2xl mt-4 md:text-5xl opacity-50">        {/* ← h2 */}
+            <h1 className="font-black text-6xl md:text-[150px]">WIDY</h1>         
+            <h2 className="font-black text-2xl mt-4 md:text-5xl opacity-50">        
               I&apos;m Creative Person.
             </h2>
             {/* Btn CV */}
@@ -48,7 +65,6 @@ export default function Home() {
       </section>
 
       {/* konten bawah */}
-
       <section className="w-full relative py-52 z-1">
         {/* container garuda */}
         <section ref={targetRef} className="h-200 w-full  flex justify-center">
