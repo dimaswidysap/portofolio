@@ -53,10 +53,11 @@ const iconCardProfil = [
             {iconCardProfil.map((icon, index) => (
           <div 
             key={index} 
-            className={`shadow-xl w-10 h-10 md:h-16 md:w-16 bg-background-second p-2 md:p-3 rounded-full ${Style.rotate}`}
+            className={`relative shadow-md w-10 h-10 md:h-16 md:w-16 bg-background-second p-2 md:p-3 rounded-2xl ${Style.rotate}`}
           >
             {/* Menampilkan elemen JSX dari array */}
             {icon}
+            <span className="h-2 aspect-square inline-flex bg-blue-700 absolute top-0 left-0 mt-1 ml-1 rounded-full"> </span>
           </div>
         ))}
             </div>
