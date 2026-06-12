@@ -1,5 +1,4 @@
 "use client";
-
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 import Image from "next/image";
@@ -8,6 +7,9 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { VisualStudioCode } from "@/components/icons/vscode";
 import { Illustrator } from "@/components/icons/adobeIllustrator";
+import { TikTok } from "@/components/icons/tiktok";
+import { Instagram } from "@/components/icons/instagram";
+import Style from "./page.module.css"
 
 export default function Home() {
   const targetRef = useRef(null);
@@ -22,6 +24,11 @@ export default function Home() {
   const sayapKanan = useTransform(scrollYProgress, [0, 1], ["0deg", "45deg"]);
   const sayapKiri = useTransform(scrollYProgress, [0, 1], ["0deg", "-45deg"]);
 
+const iconCardProfil = [
+  <TikTok key="tiktok" />, 
+  <Instagram key="instagram" /> 
+];
+
   return (
     <main className="w-full overflow-hidden">
       {/* container foto */}
@@ -30,10 +37,10 @@ export default function Home() {
         {/* container card title */}
         <div className="lg:-translate-x-1/9 absolute h-full w-full inset-0 flex justify-end">
           <div className="w-[90%] md:w-1/2  h-full p-2 justify-end flex items-start pt-32">
-          <figure className="flex w-[80%] md:w-full lg:w-[60%] lg:mr-20 aspect-2/3 bg-background rounded-xl p-2">
+          <figure className="relative flex w-[80%] md:w-full lg:w-[60%] lg:mr-20 aspect-2/3 bg-background rounded-xl p-2">
           <div className="w-full h-full rounded-md relative overflow-hidden">
              <Image
-                className="object-cover "
+                className="object-cover scale-120"
                 src="/asset/owner-pic/card-title.jpeg"
                 alt="Widy sedang coding di VS Code"
                 fill
@@ -41,6 +48,18 @@ export default function Home() {
                 sizes="(max-width: 768px) 100vw, 70vw"
               />
           </div>
+          <div className="absolute inset-0 h-full w-full flex pt-10 px-4">
+
+            {iconCardProfil.map((icon, index) => (
+          <div 
+            key={index} 
+            className={`shadow-xl w-10 h-10 md:h-16 md:w-16 bg-background-second p-2 md:p-3 rounded-full ${Style.rotate}`}
+          >
+            {/* Menampilkan elemen JSX dari array */}
+            {icon}
+          </div>
+        ))}
+            </div>
           </figure>
           </div>
         </div>
