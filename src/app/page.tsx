@@ -9,7 +9,7 @@ import { VisualStudioCode } from "@/components/icons/vscode";
 import { Illustrator } from "@/components/icons/adobeIllustrator";
 import { TikTok } from "@/components/icons/tiktok";
 import { Instagram } from "@/components/icons/instagram";
-import Style from "./page.module.css"
+import Style from "./page.module.css";
 
 export default function Home() {
   const targetRef = useRef(null);
@@ -24,10 +24,10 @@ export default function Home() {
   const sayapKanan = useTransform(scrollYProgress, [0, 1], ["0deg", "45deg"]);
   const sayapKiri = useTransform(scrollYProgress, [0, 1], ["0deg", "-45deg"]);
 
-const iconCardProfil = [
-  <TikTok key="tiktok" />, 
-  <Instagram key="instagram" /> 
-];
+  const iconCardProfil = [
+    <TikTok key="tiktok" />,
+    <Instagram key="instagram" />,
+  ];
 
   return (
     <main className="w-full overflow-hidden">
@@ -37,45 +37,46 @@ const iconCardProfil = [
         {/* container card title */}
         <div className="lg:-translate-x-1/9 absolute h-full w-full inset-0 flex justify-end">
           <div className="w-[90%] md:w-1/2  h-full p-2 justify-end flex items-start pt-32">
-          <figure className="relative flex w-[80%] md:w-full lg:w-[60%] lg:mr-20 aspect-2/3 bg-background rounded-xl p-2">
-          <div className="w-full h-full rounded-md relative overflow-hidden">
-             <Image
-                className="object-cover scale-120"
-                src="/asset/owner-pic/card-title.jpeg"
-                alt="Widy sedang coding di VS Code"
-                fill
-                priority
-                sizes="(max-width: 768px) 100vw, 70vw"
-              />
-          </div>
-          <div className="absolute inset-0 h-full w-full flex pt-10 px-4">
-
-            {iconCardProfil.map((icon, index) => (
-          <div 
-            key={index} 
-            className={`relative shadow-md w-10 h-10 md:h-16 md:w-16 bg-background-second p-2 md:p-3 rounded-2xl ${Style.rotate}`}
-          >
-            {/* Menampilkan elemen JSX dari array */}
-            {icon}
-            <span className="h-2 aspect-square inline-flex bg-blue-700 absolute top-0 left-0 mt-1 ml-1 rounded-full"> </span>
-          </div>
-        ))}
-            </div>
-          </figure>
+            <figure className="relative flex w-[80%] md:w-full lg:w-[60%] lg:mr-20 aspect-2/3 bg-background rounded-xl p-2">
+              <div className="w-full h-full rounded-md relative overflow-hidden">
+                <Image
+                  className="object-cover scale-120"
+                  src="/asset/owner-pic/card-title.jpeg"
+                  alt="Widy sedang coding di VS Code"
+                  fill
+                  priority
+                  sizes="(max-width: 768px) 100vw, 70vw"
+                />
+              </div>
+              <div className="absolute inset-0 h-full w-full flex pt-10 px-4">
+                {iconCardProfil.map((icon, index) => (
+                  <div
+                    key={index}
+                    className={`relative shadow-md w-10 h-10 md:h-16 md:w-16 bg-background-second p-2 md:p-3 rounded-2xl ${Style.rotate}`}
+                  >
+                    {/* Menampilkan elemen JSX dari array */}
+                    {icon}
+                    <span className="h-2 aspect-square inline-flex bg-blue-700 absolute top-0 left-0 mt-1 ml-1 rounded-full">
+                      {" "}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </figure>
           </div>
         </div>
         <div className="lg:translate-x-1/9 w-full relative z-2 max-w-7xl flex justify-center items-end lg:items-center pb-20 md:pb-62 lg:pb-0 h-screen">
           <div className="w-full px-2">
             <p className="text-[10px] md:text-2xl">Hello 👋, My name is</p>
-            <h1 className="font-black text-6xl md:text-[150px]">WIDY</h1>         
-            <h2 className="font-black text-2xl mt-4 md:text-5xl opacity-50">        
+            <h1 className="font-black text-6xl md:text-[150px]">WIDY</h1>
+            <h2 className="font-black text-2xl mt-4 md:text-5xl opacity-50">
               I&apos;m Creative Person.
             </h2>
             {/* Btn CV */}
             <Link
               target="_blank"
               href="https://drive.google.com/file/d/1HrZd5hQpGUMM97I65QJ9fTSIPFZp3K-x/view"
-              className="py-1 px-2 bg-foreground mt-4 inline-flex items-center gap-3 shadow-2xl rounded-md"
+              className="py-1 px-2 bg-accent outline-2 outline-foreground/30 mt-4 inline-flex items-center gap-3 shadow-2xl rounded-md"
             >
               <p className="font-bold text-sm text-background">See my CV</p>
               <ArrowRight className="text-background" size={15} />
@@ -89,9 +90,7 @@ const iconCardProfil = [
         {/* container garuda */}
         <section ref={targetRef} className="h-200 w-full  flex justify-center">
           <motion.div
-
             style={{ y, willChange: "transform" }}
-
             className="h-full relative aspect-video md:-translate-x-[20%] lg:-translate-x-[30%]"
           >
             {garuda.map((items, index) => {

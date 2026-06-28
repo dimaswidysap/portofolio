@@ -5,6 +5,7 @@
   --background: #222831;
   --background-second: #181c23;
   --foreground: #b6b6b6;
+  --accent: #232f72;
   --always-foreground: #b6b6b6;
   --footer: #08060b;
   --footerv2: rgb(20, 21, 24);
@@ -21,6 +22,7 @@
 @theme inline {
   --color-always-foreground: var(--always-foreground);
   --color-font-footer: var(--font-footer);
+  --color-accent: var(--accent);
   --color-footer: var(--footer);
   --color-footerv2: var(--footerv2);
   --color-background: var(--background);
@@ -34,5 +36,4 @@ body {
   transition:
     background-color 0.3s,
     color 0.3s;
-  /* Animasi smooth */
 }

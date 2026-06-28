@@ -1,7 +1,7 @@
 "use client";
 import { useState, useRef, useEffect } from "react";
 import { usePathname } from "next/navigation";
-import ButtonThemes from "@/components/ButtonTheme/buttonToggle";
+// import ButtonThemes from "@/components/ButtonTheme/buttonToggle";
 import Link from "next/link";
 import { navLinks } from "./navbarData";
 
@@ -62,12 +62,12 @@ const NavBar = () => {
 
   const getActiveColor = (href: string) => {
     // 1. Cek kecocokan eksak (Misal: sedang di /FrontEnd dan link-nya /FrontEnd)
-    if (pathname === href) return "bg-blue-700 text-foreground dark:text-white";
+    if (pathname === href) return "bg-accent text-foreground";
 
     // 2. Logika Khusus: Jika kita berada di dalam rute /project/...
     // dan link yang sedang dicek adalah /FrontEnd, maka buat dia aktif.
     if (href === "/FrontEnd" && pathname.startsWith("/project/")) {
-      return "bg-blue-700 text-foreground dark:text-white";
+      return "bg-accent text-foreground";
     }
 
     return "";
@@ -80,7 +80,7 @@ const NavBar = () => {
         className="relative flex justify-between items-center w-full h-max max-w-7xl px-4 md:px-2 py-4 md:py-5"
       >
         <Link
-          className={`scale-150 md:scale-100 font-bold h-max flex items-center gap-2 w-max text-sm shadow-md bg-background py-0.5 px-1 rounded-sm ${getActiveColor(linkHome?.href || "/")}`}
+          className={`scale-150 outline-1 outline-foreground/30 md:scale-100 font-bold h-max flex items-center gap-2 w-max text-sm shadow-md  py-0.5 px-1 rounded-sm ${getActiveColor(linkHome?.href || "/")}`}
           href={linkHome?.href || "/"}
         >
           <Home size={15} />
@@ -92,7 +92,7 @@ const NavBar = () => {
             {linkMain.map((item) => (
               <li key={item.name}>
                 <Link
-                  className={`${getActiveColor(item.href)} font-bold flex items-center justify-center gap-2 w-max text-sm shadow-md bg-background py-0.5 px-1 rounded-sm leading-none`}
+                  className={`${getActiveColor(item.href)} font-bold flex items-center justify-center gap-2 w-max text-sm shadow-md py-0.5 px-1 outline-1 outline-foreground/30 rounded-sm leading-none`}
                   href={item.href}
                 >
                   {item.name === "Illustrator" ? (
@@ -107,7 +107,7 @@ const NavBar = () => {
           </ul>
           <button
             onClick={() => setOpen(!open)}
-            className="bg-background h-max p-1 rounded-md"
+            className="bg-background h-max p-1 outline-1 outline-foreground/30 rounded-md"
           >
             <Grid2X2 size={20} />
           </button>
@@ -118,8 +118,8 @@ const NavBar = () => {
             open ? "translate-x-0 opacity-100" : "translate-x-full opacity-0"
           }  absolute p-1.5 top-full right-0 mt-1.5 rounded-xl shadow-md bg-footer transition-all duration-200 ease-in-out`}
         >
-          <div className="w-full h-full bg-background-second rounded-md flex flex-col px-3 py-1">
-            <ul className="flex w-full items-start gap-4 flex-col pb-4">
+          <div className="w-full h-full bg-background-second rounded-md flex flex-col px-2 py-4">
+            <ul className="flex w-full items-start gap-4 flex-col ">
               {navLinks.map((item) => (
                 <li
                   key={item.name}
@@ -133,7 +133,7 @@ const NavBar = () => {
                 >
                   <Link
                     onClick={() => setOpen(false)}
-                    className={`font-bold flex items-center gap-2 w-max text-sm shadow-md bg-background py-0.5 px-1 rounded-sm ${getActiveColor(item.href)}`}
+                    className={`font-bold flex items-center gap-2  text-sm shadow-md  outline-1 outline-foreground/30 py-0.5 px-1 rounded-sm ${getActiveColor(item.href)}`}
                     href={item.href}
                   >
                     {renderIcon(item.name)}
@@ -142,7 +142,7 @@ const NavBar = () => {
                 </li>
               ))}
             </ul>
-            <ButtonThemes />
+            {/* <ButtonThemes /> */}
           </div>
         </section>
       </nav>
