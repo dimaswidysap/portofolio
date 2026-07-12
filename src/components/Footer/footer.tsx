@@ -1,20 +1,20 @@
 import { navLinks } from "@/components/NavBar/navbarData";
 import Link from "next/link";
-import Image from "next/image";
+// import Image from "next/image";
 import { links } from "./footerData";
 
 const Footer = () => {
   return (
-    <footer className="w-full h-[50rem] overflow-hidden relative bg-footer pt-10 px-4 flex justify-center">
-      <section className="relative z-2 w-full max-w-7xl h-[35rem] md:h-[30rem] rounded-xl bg-footerv2 flex flex-wrap flex-col md:flex-row justify-between shadow-2xl">
+    <footer className="w-full h-200 overflow-hidden relative bg-footer pt-10 px-4 flex justify-center">
+      <section className="relative z-2 w-full max-w-7xl h-140 md:h-120 rounded-xl bg-footerv2 flex flex-wrap flex-col md:flex-row justify-between shadow-2xl">
         <div className="w-full pt-4 px-2 md:w-1/2">
           <h1>
             <span className="font-black text-2xl text-font-footer">WIDY</span>
           </h1>
           <h2 className="text-2xl font-black mt-5 text-font-footer">
-            AYO BAHAS PROYEK ANDA SELANJUTNYA 🚀
+            LET{"'"}S DISCUSS YOUR NEXT PROJECT 🚀
           </h2>
-          <p className="text-font-footer">Illustrasi atau Website</p>
+          <p className="text-font-footer">Illustrasi or Website?</p>
 
           <div className="flex gap-4 mt-3">
             {links.map((items) => {

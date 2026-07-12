@@ -5,7 +5,7 @@ type NavLink = {
 
 export const navLinks: readonly NavLink[] = [
   {
-    name: "Beranda",
+    name: "Home",
     href: "/",
   },
   {

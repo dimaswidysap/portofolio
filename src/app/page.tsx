@@ -4,12 +4,14 @@ import { useRef } from "react";
 import Image from "next/image";
 import { garuda } from "./Illustrator/illustratorData";
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
+// import { ArrowRight } from "lucide-react";
 import { VisualStudioCode } from "@/components/icons/vscode";
 import { Illustrator } from "@/components/icons/adobeIllustrator";
 import { TikTok } from "@/components/icons/tiktok";
 import { Instagram } from "@/components/icons/instagram";
-import Style from "./page.module.css";
+import { LinkedIn } from "@/components/icons/linkedln";
+
+// import Style from "./page.module.css";
 
 export default function Home() {
   const targetRef = useRef(null);
@@ -25,64 +27,81 @@ export default function Home() {
   const sayapKiri = useTransform(scrollYProgress, [0, 1], ["0deg", "-45deg"]);
 
   const iconCardProfil = [
-    <TikTok key="tiktok" />,
-    <Instagram key="instagram" />,
+    {
+      href: "https://www.tiktok.com/@dimaswidysap",
+      icon: <TikTok key="tiktok" />,
+    },
+    {
+      href: "https://www.instagram.com/dimaswidysaputraa/",
+      icon: <Instagram key="instagram" />,
+    },
+    {
+      href: "",
+      icon: <LinkedIn key="LinkedLn" />,
+    },
   ];
 
   return (
     <main className="w-full overflow-hidden">
       {/* container foto */}
-      <section className="w-full h-screen flex justify-center relative overflow-hidden">
-        <span className="inline-flex h-1/2 absolute aspect-square top-0 right-0 bg-blue-900 opacity-60 blur-[50px] rounded-full translate-x-1/2 -translate-y-1/2 scale-150 md:scale-200 lg:scale-250"></span>
-        {/* container card title */}
-        <div className="lg:-translate-x-1/9 absolute h-full w-full inset-0 flex justify-end">
-          <div className="w-[90%] md:w-1/2  h-full p-2 justify-end flex items-start pt-32">
-            <figure className="relative flex w-[80%] md:w-full lg:w-[60%] lg:mr-20 aspect-2/3 bg-background rounded-xl p-2">
-              <div className="w-full h-full rounded-md relative overflow-hidden">
-                <Image
-                  className="object-cover scale-120"
-                  src="/asset/owner-pic/card-title.jpeg"
-                  alt="Widy sedang coding di VS Code"
-                  fill
-                  priority
-                  sizes="(max-width: 768px) 100vw, 70vw"
-                />
-              </div>
-              <div className="absolute inset-0 h-full w-full flex pt-10 px-4">
-                {iconCardProfil.map((icon, index) => (
-                  <div
+      <section className="w-full h-screen flex justify-center items-center relative overflow-hidden">
+        {/* container picture */}
+        <figure className="hidden md:flex translate-x-1/8 lg:translate-x-0 h-full aspect-video justify-center items-center">
+          <Image
+            className="object-cover"
+            src="/asset/owner-pic/bg-picture.png"
+            alt="profil background"
+            fill
+            priority
+          />
+        </figure>
+
+        {/* Main Overlay Content */}
+        <section className="w-full h-full flex flex-col md:flex-row absolute inset-0">
+          {/* Left/Top Half: Name */}
+          <div className="w-full flex-1 md:h-full md:w-1/2 pt-0 md:pt-42 lg:pt-32 flex justify-center md:justify-end items-center md:items-start lg:px-[10%]">
+            <span className="inline-flex flex-col md:translate-x-1/5 lg:translate-x-0 relative justify-center h-max items-center">
+              {/* Scaled absolute positioning and text size for mobile */}
+              <p className="absolute -top-2 md:-top-2.5 font-black text-sm md:text-base">
+                DIMAS
+              </p>
+              <h1 className="text-[80px] sm:text-[100px] md:text-[140px] font-black leading-none">
+                WIDY
+              </h1>
+              <p className="absolute -bottom-2 md:-bottom-2.25 font-black text-sm md:text-base">
+                SAPUTRA
+              </p>
+            </span>
+          </div>
+
+          {/* Right/Bottom Half: Contacts */}
+          <div className="w-full flex-1 md:w-1/2 md:h-full items-center md:items-start flex flex-col justify-center md:justify-end px-4 md:px-0 md:pl-[10%] pb-8 md:pb-[5%]">
+            <span className="flex flex-col h-max max-w-full">
+              <a
+                target="_blank"
+                className="text-xs sm:text-sm bg-background-second shadow-xl border border-font-footer/10 py-2 px-3 rounded-md font-secondary font-black truncate max-w-full"
+                href="mailto:dimaswidysaputra41@gmail.com"
+              >
+                dimaswidysaputra41@gmail.com
+              </a>
+            </span>
+
+            <div className="w-full flex justify-center md:justify-start gap-2 flex-wrap mt-5">
+              {iconCardProfil.map((items, index) => {
+                return (
+                  <Link
+                    target="_blank"
+                    href={items.href}
                     key={index}
-                    className={`relative shadow-md w-10 h-10 md:h-16 md:w-16 bg-background-second p-2 md:p-3 rounded-2xl ${Style.rotate}`}
+                    className="inline-flex w-12 justify-center items-center aspect-square bg-background-second shadow-xl rounded-md p-1 transition-transform hover:scale-105 active:scale-95"
                   >
-                    {/* Menampilkan elemen JSX dari array */}
-                    {icon}
-                    <span className="h-2 aspect-square inline-flex bg-blue-700 absolute top-0 left-0 mt-1 ml-1 rounded-full">
-                      {" "}
-                    </span>
-                  </div>
-                ))}
-              </div>
-            </figure>
+                    {items.icon}
+                  </Link>
+                );
+              })}
+            </div>
           </div>
-        </div>
-        <div className="lg:translate-x-1/9 w-full relative z-2 max-w-7xl flex justify-center items-end lg:items-center pb-20 md:pb-62 lg:pb-0 h-screen">
-          <div className="w-full px-2">
-            <p className="text-[10px] md:text-2xl">Hello 👋, My name is</p>
-            <h1 className="font-black text-6xl md:text-[150px]">WIDY</h1>
-            <h2 className="font-black text-2xl mt-4 md:text-5xl opacity-50">
-              I&apos;m Creative Person.
-            </h2>
-            {/* Btn CV */}
-            <Link
-              target="_blank"
-              href="https://drive.google.com/file/d/1HrZd5hQpGUMM97I65QJ9fTSIPFZp3K-x/view"
-              className="py-1 px-2 bg-accent outline-2 outline-foreground/30 mt-4 inline-flex items-center gap-3 shadow-2xl rounded-md"
-            >
-              <p className="font-bold text-sm text-background">See my CV</p>
-              <ArrowRight className="text-background" size={15} />
-            </Link>
-          </div>
-        </div>
+        </section>
       </section>
 
       {/* konten bawah */}
@@ -146,7 +165,7 @@ export default function Home() {
               <figure className="absolute h-32 aspect-square rotate-12 mt-4">
                 <Illustrator className="object-cover" />
               </figure>
-              <figure className="absolute right-0 top-[15rem] h-32 aspect-square -rotate-12 mt-4">
+              <figure className="absolute right-0 top-60 h-32 aspect-square -rotate-12 mt-4">
                 <VisualStudioCode className="object-cover" />
               </figure>
             </div>
@@ -171,7 +190,7 @@ export default function Home() {
           </figure>
           {/*  */}
           <section className="w-full flex mt-4 px-4 gap-4 lg:pl-[50%]">
-            <figure className="w-1/2 aspect-square relative z-10 rounded-2xl shadow-2xl md:w-[40%] lg:max-w-[40rem]  bg-background-second p-2 md:p-4">
+            <figure className="w-1/2 aspect-square relative z-10 rounded-2xl shadow-2xl md:w-[40%] lg:max-w-160  bg-background-second p-2 md:p-4">
               <div className="relative w-full h-full rounded-md overflow-hidden">
                 <Image
                   className="object-cover"
@@ -183,7 +202,7 @@ export default function Home() {
                 />
               </div>
             </figure>
-            <figure className="flex-1 aspect-vedeo relative z-10 rounded-2xl shadow-2xl md:w-[40%] lg:max-w-[40rem]  bg-background-second p-2 md:p-4">
+            <figure className="flex-1 aspect-vedeo relative z-10 rounded-2xl shadow-2xl md:w-[40%] lg:max-w-160  bg-background-second p-2 md:p-4">
               <div className="relative w-full h-full rounded-md overflow-hidden">
                 <Image
                   className="object-cover"

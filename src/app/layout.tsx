@@ -11,18 +11,18 @@ const montserrat = Montserrat({
 });
 
 export const metadata: Metadata = {
-  title: "Widy — Illustrator & Front-End Developer",
-  description: "Portfolio Widy, seorang illustrator dan front-end developer dari Indonesia.",
+  title: "Illustrator & Front-End Developer",
+  description: "Portfolio, illustrator, front-end developer",
   openGraph: {
-    title: "Widy — Illustrator & Front-End Developer",
-    description: "Portfolio Widy, illustrator & front-end developer.",
+    title: "llustrator & Front-End Developer",
+    description: "Portfolio, illustrator, front-end developer,",
     url: "https://widyy.vercel.app",
-    siteName: "Widy Portfolio",
+    siteName: "Portfolio",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Widy — Illustrator & Front-End Developer",
+    title: "Illustrator & Front-End Developer",
   },
 };
 

@@ -38,11 +38,11 @@ const FrontEnd = () => {
               {displayProject?.title}
             </p>
             <p>
-              Situs Web yang dapat memmbantu anda dalam mencari smartphone yang
-              sesuai dengan kebutuhan anda, Dengan mengajukan beberapa
-              pertanyaan yang anda harus jawab. Website dibangun menggunakan
-              HTML, dan Javascript. Mengambil dataset yang terpercaya dari David
-              Gadgetin.
+              A web application that helps users find the most suitable
+              smartphone based on their needs by guiding them through a series
+              of questions. Built with HTML and JavaScript, the application uses
+              a trusted smartphone dataset curated by David Gadgetin to deliver
+              accurate and personalized recommendations.
             </p>
             <div className="mt-4 flex gap-4">
               <Link

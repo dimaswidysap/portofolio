@@ -44,7 +44,7 @@ const Illustrator = () => {
     [0.7, 1.1],
   );
 
-  const heroTeks = "ILLUSTRATOR";
+  const heroTeks = "ILLUSTRATIONS";
 
   return (
     <main ref={targetRef} className="w-full">
@@ -53,9 +53,9 @@ const Illustrator = () => {
         <div className="absolute h-screen w-full max-w-7xl inset-0 left-1/2 -translate-x-1/2  z-4 flex justify-center items-start">
           <motion.span
             style={{ scale: textScale }}
-            className="mt-[10rem] md:mt-[15rem] scale-80 md:scale-100 relative text-always-foreground inline-flex justify-center items-center"
+            className="mt-40 md:mt-60 scale-80 md:scale-100 relative text-always-foreground inline-flex justify-center items-center"
           >
-            <p className="absolute -top-[2rem]  font-black">BEST</p>
+            <p className="absolute -top-8 font-black">BEST</p>
             <h1 className="font-black flex gap-2 text-5xl lg:text-7xl text-shadow-2xs">
               {heroTeks.split("").map((item, index) => {
                 return (
@@ -68,7 +68,7 @@ const Illustrator = () => {
                 );
               })}
             </h1>
-            <p className="absolute -bottom-[2rem] font-black">I MAKE.</p>
+            <p className="absolute -bottom-8 font-black">I{"'"}VE MADE.</p>
           </motion.span>
         </div>
         <figure className="absolute inset-0 w-full h-screen">
@@ -141,7 +141,7 @@ const Illustrator = () => {
       </section>
       {/* second page */}
       <section className="w-full flex flex-wrap justify-center">
-        <span className="inline-flex justify-center w-full h-[5rem] bg-background">
+        <span className="inline-flex justify-center w-full h-20 bg-background">
           <span className="inline-flex items-center w-full max-w-7xl h-full">
             <p className="font-black text-2xl md:text-3xl px-2">
               ACTION ILLUSTRATION
@@ -150,7 +150,7 @@ const Illustrator = () => {
         </span>
       </section>
       {/* third page */}
-      <section className="w-full h-[50rem] flex justify-center overflow-hidden bg-background-second">
+      <section className="w-full h-200 flex justify-center overflow-hidden bg-background-second">
         <section className="w-full h-full max-w-7xl flex flex-col-reverse md:flex-row">
           {/* conatiner mocup */}
           <div className="w-full h-1/2 bg-red md:w-1/3 md:h-full bg-background  shadow-2xl relative z-3">
