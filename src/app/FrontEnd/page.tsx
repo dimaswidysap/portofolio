@@ -66,13 +66,13 @@ const FrontEnd = () => {
       </section>
 
       {/* container-card */}
-      <section className="w-full max-w-7xl  m-auto mt-32 md:mt-0 flex flex-wrap justify-center items-center gap-[5rem] mb-[10rem]">
+      <section className="w-full max-w-7xl  m-auto mt-32 md:mt-0 flex flex-wrap justify-center items-center gap-20 mb-40">
         {cardProjects.map((items) => {
           const picDisplay = items.image.filter((_, index) => index === 0);
           return (
             <div
               key={items.title}
-              className="w-[90%] md:max-w-[15rem] lg:max-w-[20rem] aspect-3/4 bg-background-second rounded-2xl shadow-md flex flex-col overflow-hidden"
+              className="w-[90%] md:max-w-60 lg:max-w-[20rem] aspect-3/4 bg-background-second rounded-2xl shadow-md flex flex-col overflow-hidden"
             >
               <figure className="w-full p-3 aspect-16/10 bg-footerv2 rounded-2xl relative">
                 <div className="w-full h-full rounded-md relative overflow-hidden">

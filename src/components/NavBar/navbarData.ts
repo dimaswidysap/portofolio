@@ -17,11 +17,11 @@ export const navLinks: readonly NavLink[] = [
     href: "/FrontEnd",
   },
   {
-    name: "About Me",
+    name: "About",
     href: "/About",
   },
   {
-    name: "Contact Me",
+    name: "Contact",
     href: "/Contact",
   },
 ] as const;

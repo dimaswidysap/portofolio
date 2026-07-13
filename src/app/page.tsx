@@ -46,7 +46,7 @@ export default function Home() {
       {/* container foto */}
       <section className="w-full h-screen flex justify-center items-center relative overflow-hidden">
         {/* container picture */}
-        <figure className="hidden md:flex translate-x-1/8 lg:translate-x-0 h-full aspect-video justify-center items-center">
+        <figure className="md:flex translate-x-1/8 lg:translate-x-0 h-full aspect-video justify-center items-center">
           <Image
             className="object-cover"
             src="/asset/owner-pic/bg-picture.png"
