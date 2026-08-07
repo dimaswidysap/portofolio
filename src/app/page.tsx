@@ -10,8 +10,7 @@ import { Illustrator } from "@/components/icons/adobeIllustrator";
 import { TikTok } from "@/components/icons/tiktok";
 import { Instagram } from "@/components/icons/instagram";
 import { LinkedIn } from "@/components/icons/linkedln";
-
-// import Style from "./page.module.css";
+import HeroHome from "./components/heroHome";
 
 export default function Home() {
   const targetRef = useRef(null);
@@ -43,67 +42,8 @@ export default function Home() {
 
   return (
     <main className="w-full overflow-hidden">
-      {/* container foto */}
-      <section className="w-full h-screen flex justify-center items-center relative overflow-hidden">
-        {/* container picture */}
-        <figure className="md:flex translate-x-1/8 lg:translate-x-0 h-full aspect-video justify-center items-center">
-          <Image
-            className="object-cover"
-            src="/asset/owner-pic/bg-picture.png"
-            alt="profil background"
-            fill
-            priority
-          />
-        </figure>
-
-        {/* Main Overlay Content */}
-        <section className="w-full h-full flex flex-col md:flex-row absolute inset-0">
-          {/* Left/Top Half: Name */}
-          <div className="w-full flex-1 md:h-full md:w-1/2 pt-0 md:pt-42 lg:pt-32 flex justify-center md:justify-end items-center md:items-start lg:px-[10%]">
-            <span className="inline-flex flex-col md:translate-x-1/5 lg:translate-x-0 relative justify-center h-max items-center">
-              {/* Scaled absolute positioning and text size for mobile */}
-              <p className="absolute -top-2 md:-top-2.5 font-black text-sm md:text-base">
-                DIMAS
-              </p>
-              <h1 className="text-[80px] sm:text-[100px] md:text-[140px] font-black leading-none">
-                WIDY
-              </h1>
-              <p className="absolute -bottom-2 md:-bottom-2.25 font-black text-sm md:text-base">
-                SAPUTRA
-              </p>
-            </span>
-          </div>
-
-          {/* Right/Bottom Half: Contacts */}
-          <div className="w-full flex-1 md:w-1/2 md:h-full items-center md:items-start flex flex-col justify-center md:justify-end px-4 md:px-0 md:pl-[10%] pb-8 md:pb-[5%]">
-            <span className="flex flex-col h-max max-w-full">
-              <a
-                target="_blank"
-                className="text-xs sm:text-sm bg-background-second shadow-xl border border-font-footer/10 py-2 px-3 rounded-md font-secondary font-black truncate max-w-full"
-                href="mailto:dimaswidysaputra41@gmail.com"
-              >
-                dimaswidysaputra41@gmail.com
-              </a>
-            </span>
-
-            <div className="w-full flex justify-center md:justify-start gap-2 flex-wrap mt-5">
-              {iconCardProfil.map((items, index) => {
-                return (
-                  <Link
-                    target="_blank"
-                    href={items.href}
-                    key={index}
-                    className="inline-flex w-12 justify-center items-center aspect-square bg-background-second shadow-xl rounded-md p-1 transition-transform hover:scale-105 active:scale-95"
-                  >
-                    {items.icon}
-                  </Link>
-                );
-              })}
-            </div>
-          </div>
-        </section>
-      </section>
-
+      {/* hero section */}
+      <HeroHome />
       {/* konten bawah */}
       <section className="w-full relative py-52 z-1">
         {/* container garuda */}
@@ -146,7 +86,7 @@ export default function Home() {
         {/* konten teks */}
         <section className="absolute z-2 w-full h-full inset-0 max-w-120 left-1/2 -translate-x-1/2">
           {/* background */}
-          <span className="inline-flex h-full w-full bg-black/50 rounded-t-2xl"></span>
+          <span className="inline-flex h-full w-full bg-black/50"></span>
 
           {/* konten */}
           <section className="absolute inset-0 h-full w-full pt-24">

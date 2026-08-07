@@ -126,7 +126,8 @@ const NavBar = () => {
                   className={`${
                     item.name === "Beranda" ||
                     item.name === "Illustrator" ||
-                    item.name === "Front-End"
+                    item.name === "Front-End" ||
+                    item.name === "Home"
                       ? "md:hidden"
                       : "flex"
                   }`}
