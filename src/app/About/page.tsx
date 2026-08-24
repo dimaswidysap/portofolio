@@ -22,7 +22,7 @@ const AboutMe = () => {
         <section className="relative z-2 w-full max-w-7xl h-screen flex justify-center items-center">
           <motion.section
             style={{ y: conPictures }}
-            className="w-[90%] h-[90%] max-h-[30rem] lg:w-[60%] flex flex-wrap p-2 "
+            className="w-[90%] h-[90%] max-h-120 lg:w-[60%] flex flex-wrap p-2 "
           >
             {fotos.map((item, index) => {
               let style = "";
@@ -64,7 +64,10 @@ const AboutMe = () => {
       {/* page less container*/}
       <section className="w-full bg-background relative flex flex-col items-center z-2 border-t-2 border-foreground">
         <section className="w-full  relative max-w-7xl">
-          <div className="translate-y-1/4 relative outline outline-foreground z-2 w-full max-w-[40rem] m-auto px-2 bg-background-second py-3 rounded-2xl shadow-md">
+          <div className="md:translate-y-1/4 relative z-2 w-full max-w-160 m-auto px-2 md:px-10 py-3 rounded-2xl md:bg-background-second/90">
+            <span className="bg-accent inline-flex w-max px-2 py-px my-10 rounded-md">
+              <p className="text-white text-sm font-semibold">About me</p>
+            </span>
             <h1 className="font-black text-2xl">
               HALLO Let Me Introduce Myself
             </h1>
@@ -127,7 +130,7 @@ const AboutMe = () => {
           </div>
         </section>
         {/* page two */}
-        <section className="relative  z-2 w-full max-w-7xl  mt-[20rem] flex flex-col md:flex-row gap-2 m-auto pb-[10rem]">
+        <section className="relative  z-2 w-full max-w-7xl  mt-80 flex flex-col md:flex-row gap-2 m-auto pb-40">
           {toolsSection.map((item, index) => {
             return (
               <div
