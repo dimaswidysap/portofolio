@@ -68,23 +68,32 @@ const AboutMe = () => {
             <span className="bg-accent inline-flex w-max px-2 py-px my-10 rounded-md">
               <p className="text-white text-sm font-semibold">About me</p>
             </span>
-            <h1 className="font-black text-2xl">
-              HALLO Let Me Introduce Myself
+            <h1 className="font-black relative text-2xl">
+              HALLO Let Me Introduce Myself{" "}
+              <span className="inline-flex absolute h-10 rotate-3 aspect-square text-accent">
+                <svg
+                  viewBox="0 0 200 200"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="currentColor"
+                >
+                  <polygon points="100,10 123,68 185,68 135,105 154,166 100,127 46,166 65,105 15,68 77,68" />
+                </svg>
+              </span>
             </h1>
             <p className="mt-2 text-balance">
-              My name is Dimas Widy Saputra, a 21-year-old student currently
+              My name is Dimas Widy Saputra, a 22 year old student currently
               pursuing a degree in Informatics Engineering at Universitas PGRI
               Madiun, class of 2023. I am originally from Madiun and have a
               strong passion for both technology and digital creativity.
             </p>
-            <span className="mt-2 w-1/2 h-px bg-background inline-flex"></span>
+            <span className="mt-2 w-1/2 h-px bg-accent inline-flex"></span>
             <p className="mt-2 text-balance">
               I have a long-standing interest in drawing, which I have developed
               into a part of my personal portfolio as a way to express ideas and
               creativity visually. However, my primary goal is to build a career
               in the technology field, especially in web development.
             </p>
-            <span className="mt-2 w-1/2 h-px bg-background inline-flex"></span>
+            <span className="mt-2 w-1/2 h-px bg-accent inline-flex"></span>
             <p className="mt-2 text-balance">
               I am highly open to career opportunities as a Front-End Developer,
               where I can combine technical skills with visual aesthetics to
