@@ -4,15 +4,7 @@ import { useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { figures } from "./illustratorData";
-import GallerySwiper from "./GallerySwiper";
-import { links } from "@/components/Footer/footerData";
-import { TikTok } from "@/components/icons/tiktok";
-import { Instagram } from "@/components/icons/instagram";
-
-const instagram = links.find((_, index) => index === 2);
-const tiktok = links.find((_, index) => index === 3);
-
-const activity = [tiktok, instagram];
+import HorizontalSection from "@/app/components/sections/HorizontalSection";
 
 const Illustrator = () => {
   const targetRef = useRef(null);
@@ -45,7 +37,18 @@ const Illustrator = () => {
   );
 
   const heroTeks = "ILLUSTRATIONS";
-
+  //adding smooth scroll
+  // useLayoutEffect(() => {
+  //   let scroll: any;
+  //   if (typeof window !== "undefined") {
+  //     import("locomotive-scroll").then((LocomotiveScroll) => {
+  //       scroll = new LocomotiveScroll.default();
+  //     });
+  //   }
+  //   return () => {
+  //     if (scroll) scroll.destroy();
+  //   };
+  // }, []);
   return (
     <main ref={targetRef} className="w-full">
       {/* page one */}
@@ -100,7 +103,7 @@ const Illustrator = () => {
               <motion.figure
                 style={{ x: index === 0 ? figureKiri : figureKanan }}
                 key={items.alt}
-                className={`${index === 0 ? "translate-x-[60%] md:translate-x-1/2" : "-translate-x-[60%] md:-translate-x-1/2"}  h-[70%] aspect-square relative`}
+                className={`${index === 0 ? "translate-x-[60%] md:translate-x-1/3 lg:translate-x-1/6" : "-translate-x-[60%] md:-translate-x-1/3 lg:-translate-x-1/6"} lg:scale-150  h-[70%] aspect-square relative`}
               >
                 <Image
                   className="object-cover lg:scale-105"
@@ -141,7 +144,7 @@ const Illustrator = () => {
       </section>
       {/* second page */}
       <section className="w-full flex flex-wrap justify-center">
-        <span className="inline-flex justify-center w-full h-20 bg-background">
+        <span className="inline-flex justify-center w-full h-20 bg-background-second shadow-2xl">
           <span className="inline-flex items-center w-full max-w-7xl h-full">
             <p className="font-black text-2xl md:text-3xl px-2">
               ACTION ILLUSTRATION
@@ -150,71 +153,8 @@ const Illustrator = () => {
         </span>
       </section>
       {/* third page */}
-      <section className="w-full h-200 flex justify-center overflow-hidden bg-background-second">
-        <section className="w-full h-full max-w-7xl flex flex-col-reverse md:flex-row">
-          {/* conatiner mocup */}
-          <div className="w-full h-1/2 bg-red md:w-1/3 md:h-full bg-background  shadow-2xl relative z-3">
-            {/* hiasan */}
-            <div className="w-full h-full relative  md:flex">
-              <span className="inline-flex w-1/5 aspect-square bg-background absolute top-0 right-0 -translate-y-1/2 translate-x-1/2 rounded-full"></span>
-              <span className="inline-flex w-1/5 aspect-square bg-background md:hidden absolute top-0 left-0 -translate-y-1/2 -translate-x-1/2 rounded-full"></span>
-              <span className="w-1/5 aspect-square bg-background hidden md:flex absolute bottom-0 right-0 translate-y-1/2 translate-x-1/2 rounded-full"></span>
-            </div>
-            {/* konten */}
-            <div className="absolute w-full h-full inset-0 flex items-center">
-              <div className="w-full px-2.5">
-                <h1 className="text-4xl font-black">
-                  See all my drawing activities on
-                </h1>
-                <div className="w-full flex flex-wrap">
-                  {activity.map((items, index) => {
-                    let link = "";
-                    let figure = "";
-
-                    if (index === 0) {
-                      link =
-                        "-translate-y-1/8 bg-footer -rotate-4 text-always-foreground";
-                      figure = "bg-footerv2";
-                    }
-                    if (index === 1) {
-                      link =
-                        "translate-y-1/8 bg-footer ml-4 rotate-4 text-always-foreground";
-                      figure = "bg-footerv2";
-                    }
-
-                    return (
-                      <Link
-                        key={index}
-                        href={`${items?.href}`}
-                        target="_blank"
-                        className={` ${link} shadow-md  outline outline-foreground/50  flex items-center gap-1.5 w-max p-2 rounded-xl`}
-                      >
-                        <figure
-                          className={`h-14 aspect-square shadow-md rounded-md relative ${figure}`}
-                        >
-                          {items?.name === "icon-tiktok" ? (
-                            <TikTok className="w-full h-full" />
-                          ) : (
-                            <Instagram className="w-full h-full" />
-                          )}
-                        </figure>
-                        <span className="font-black">
-                          {" "}
-                          {items?.nameContent}
-                        </span>
-                      </Link>
-                    );
-                  })}
-                </div>
-              </div>
-            </div>
-          </div>
-          {/* container figure */}
-          <div className="w-full flex-1 bg-red md:w-1/2 md:h-full items-center justify-center  bg-background-second ">
-            <GallerySwiper />
-          </div>
-        </section>
-      </section>
+      <HorizontalSection />
+      {/*  */}
     </main>
   );
 };
