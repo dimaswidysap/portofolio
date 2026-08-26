@@ -45,7 +45,7 @@ const display = data.slice(0, 4);
 
 const SmartphoneVersion = () => {
   return (
-    <section className="w-full h-screen relative md:hidden">
+    <section className="w-full h-screen overflow-hidden relative md:hidden">
       {/* container text */}
       <section className="relative z-10 w-full h-full flex justify-center items-center">
         <h1 className="flex h-full w-20 flex-col justify-center items-center">
