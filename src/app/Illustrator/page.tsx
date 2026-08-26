@@ -2,9 +2,9 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 import Image from "next/image";
-import Link from "next/link";
 import { figures } from "./illustratorData";
 import HorizontalSection from "@/app/components/sections/HorizontalSection";
+import SmartphoneVersion from "../components/sections/mobile";
 
 const Illustrator = () => {
   const targetRef = useRef(null);
@@ -154,6 +154,7 @@ const Illustrator = () => {
       </section>
       {/* third page */}
       <HorizontalSection />
+      <SmartphoneVersion />
       {/*  */}
     </main>
   );
