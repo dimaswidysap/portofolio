@@ -4,6 +4,7 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import Image from "next/image";
 import { gallery, toolsSection, fotos } from "./aboutData";
 import WorkExperienceTimeline from "@/components/WorkExperiences/WorkExperiences";
+import CertificateGrid from "@/app/About/Certificate/Certificategrid";
 const AboutMe = () => {
   const { scrollYProgress } = useScroll();
 
@@ -200,6 +201,9 @@ const AboutMe = () => {
         {/* page three (experinces) */}
         <section className="w-full   relative max-w-7xl ">
           <WorkExperienceTimeline />
+        </section>
+        <section className="w-full  relative max-w-7xl ">
+          <CertificateGrid />
         </section>
       </section>
     </main>
