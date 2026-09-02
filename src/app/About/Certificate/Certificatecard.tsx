@@ -18,23 +18,23 @@ interface CertificateCardProps {
 
 export default function CertificateCard({ data }: CertificateCardProps) {
   const [isActive, setIsActive] = useState(false);
-  const [isDesktop, setIsDesktop] = useState(true);
-  const wrapperRef = useRef(null);
+  const [isDesktop, setIsDesktop] = useState<boolean>(true);
+  const [isMounted, setIsMounted] = useState(false); // Prevents SSR hydration mismatch
+  const wrapperRef = useRef<HTMLDivElement>(null);
 
-  // Deteksi lebar layar untuk menentukan mode interaksi (hover vs klik)
   useEffect(() => {
+    setIsMounted(true);
     const checkScreen = () => setIsDesktop(window.innerWidth >= 1024);
     checkScreen();
     window.addEventListener("resize", checkScreen);
     return () => window.removeEventListener("resize", checkScreen);
   }, []);
 
-  // Tutup kartu saat tap/klik di luar area (khusus mode klik / mobile & tablet)
   useEffect(() => {
     if (isDesktop || !isActive) return;
 
-    const handleOutsideClick = (event) => {
-      if (wrapperRef.current && !wrapperRef.current.contains(event.target)) {
+    const handleOutsideClick = (event: MouseEvent | TouchEvent) => {
+      if (wrapperRef.current && !wrapperRef.current.contains(event.target as Node)) {
         setIsActive(false);
       }
     };
@@ -51,13 +51,16 @@ export default function CertificateCard({ data }: CertificateCardProps) {
   const closeOnHover = () => isDesktop && setIsActive(false);
   const toggleOnClick = () => !isDesktop && setIsActive((prev) => !prev);
 
-  const handleKeyDown = (event) => {
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
     if (event.key === "Enter" || event.key === " ") {
       event.preventDefault();
       setIsActive((prev) => !prev);
     }
     if (event.key === "Escape") setIsActive(false);
   };
+
+  // Prevent rendering mobile-only UI elements on server to avoid hydration errors
+  if (!isMounted) return null;
 
   return (
     <div
@@ -66,7 +69,7 @@ export default function CertificateCard({ data }: CertificateCardProps) {
       onMouseLeave={closeOnHover}
       className={`relative ${isActive ? "z-30" : "z-0"}`}
     >
-      {/* ===== Kartu Awal (judul + background) ===== */}
+      {/* ===== Base Card ===== */}
       <div
         role="button"
         tabIndex={0}
@@ -94,11 +97,11 @@ export default function CertificateCard({ data }: CertificateCardProps) {
         </div>
       </div>
 
-      {/* ===== Kartu Detail (melayang / absolute) ===== */}
+      {/* ===== Floating Detail Card ===== */}
       <div
         className={`absolute inset-x-0 top-0 z-30 origin-top overflow-hidden rounded-2xl border border-accent/40 bg-background-second shadow-2xl shadow-black/40 transition-all duration-300 ease-out lg:-inset-x-3 ${isActive
-          ? "pointer-events-auto translate-y-0 scale-100 opacity-100"
-          : "pointer-events-none -translate-y-2 scale-95 opacity-0"
+            ? "pointer-events-auto translate-y-0 scale-100 opacity-100"
+            : "pointer-events-none -translate-y-2 scale-95 opacity-0"
           }`}
       >
         {!isDesktop && (
@@ -146,5 +149,5 @@ export default function CertificateCard({ data }: CertificateCardProps) {
         </div>
       </div>
     </div>
-  )
+  );
 }
