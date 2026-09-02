@@ -3,14 +3,20 @@
 import { useEffect, useRef, useState } from "react";
 import { Award, Calendar, ExternalLink, X } from "lucide-react";
 
-/**
- * Kartu sertifikat pencapaian.
- * - Kondisi awal: judul dengan background gambar.
- * - Desktop (>= 1024px): detail muncul saat di-hover.
- * - Mobile & tablet (< 1024px): detail muncul saat di-klik/tap,
- *   dan tertutup lagi saat tap di luar kartu atau tombol close.
- */
-export default function CertificateCard({ data }) {
+interface CertificateData {
+  id: number;
+  title: string;
+  subtitle: string;
+  date: string;
+  image: string;
+  driveLink: string;
+}
+
+interface CertificateCardProps {
+  data: CertificateData;
+}
+
+export default function CertificateCard({ data }: CertificateCardProps) {
   const [isActive, setIsActive] = useState(false);
   const [isDesktop, setIsDesktop] = useState(true);
   const wrapperRef = useRef(null);
@@ -140,5 +146,5 @@ export default function CertificateCard({ data }) {
         </div>
       </div>
     </div>
-  );
+  )
 }

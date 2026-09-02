@@ -12,7 +12,7 @@ export default function CertificateGrid() {
             Achievement
           </span>
           <h2 className="mt-2 text-2xl font-bold text-foreground sm:text-3xl lg:text-4xl">
-            Certificates {'&'} Awards
+            Certificates {`&`} Awards
           </h2>
         </div>
 
