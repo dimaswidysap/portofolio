@@ -7,7 +7,7 @@ export default function WorkExperienceTimeline() {
     const [activeId, setActiveId] = useState<number | null>(null);
 
     return (
-        <section className="min-h-screen px-6 py-20 sm:px-8">
+        <section className="px-6 py-20 sm:px-8">
             <div className="mx-auto max-w-2xl">
 
                 {/* ── Header ── */}
@@ -22,7 +22,7 @@ export default function WorkExperienceTimeline() {
                 </div>
 
                 {/* ── Timeline ── */}
-                <div className="relative pl-7 before:absolute before:left-[6px] before:top-[10px] before:bottom-[10px] before:w-px before:bg-gradient-to-b before:from-foreground/20 before:via-foreground/10 before:to-transparent">
+                <div className="relative pl-7 before:absolute before:left-1.5 before:top-[10px] before:bottom-[10px] before:w-px before:bg-gradient-to-b before:from-foreground/20 before:via-foreground/10 before:to-transparent">
                     {workExperiences.map((exp, index) => {
                         const isActive = activeId === index;
                         const isLast = index === workExperiences.length - 1;
@@ -124,7 +124,7 @@ export default function WorkExperienceTimeline() {
                 <footer className="mt-10 flex items-center gap-4">
                     <div className="h-px flex-1 bg-background-second" />
                     <span className="text-[11px] uppercase tracking-[0.12em] text-foreground/40">
-                        {workExperiences.length} Perusahaan
+                        {workExperiences.length} experience
                     </span>
                     <div className="h-px flex-1 bg-background-second" />
                 </footer>

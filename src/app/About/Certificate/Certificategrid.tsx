@@ -9,10 +9,10 @@ export default function CertificateGrid() {
       <div className="mx-auto max-w-6xl">
         <div className="mb-8 text-center sm:mb-10">
           <span className="text-xs font-semibold uppercase tracking-widest text-accent">
-            Pencapaian
+            Achievement
           </span>
           <h2 className="mt-2 text-2xl font-bold text-foreground sm:text-3xl lg:text-4xl">
-            Sertifikat &amp; Penghargaan
+            Certificates {'&'} Awards
           </h2>
         </div>
 

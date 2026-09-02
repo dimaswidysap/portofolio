@@ -67,9 +67,8 @@ export default function CertificateCard({ data }) {
         aria-expanded={isActive}
         onClick={toggleOnClick}
         onKeyDown={handleKeyDown}
-        className={`group relative h-48 w-full cursor-pointer overflow-hidden rounded-2xl border transition-all duration-300 sm:h-56 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background ${
-          isActive ? "border-accent" : "border-foreground/10"
-        }`}
+        className={`group relative h-48 w-full cursor-pointer overflow-hidden rounded-2xl border transition-all duration-300 sm:h-56 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background ${isActive ? "border-accent" : "border-foreground/10"
+          }`}
       >
         <img
           src={data.image}
@@ -91,11 +90,10 @@ export default function CertificateCard({ data }) {
 
       {/* ===== Kartu Detail (melayang / absolute) ===== */}
       <div
-        className={`absolute inset-x-0 top-0 z-30 origin-top overflow-hidden rounded-2xl border border-accent/40 bg-background-second shadow-2xl shadow-black/40 transition-all duration-300 ease-out lg:-inset-x-3 ${
-          isActive
-            ? "pointer-events-auto translate-y-0 scale-100 opacity-100"
-            : "pointer-events-none -translate-y-2 scale-95 opacity-0"
-        }`}
+        className={`absolute inset-x-0 top-0 z-30 origin-top overflow-hidden rounded-2xl border border-accent/40 bg-background-second shadow-2xl shadow-black/40 transition-all duration-300 ease-out lg:-inset-x-3 ${isActive
+          ? "pointer-events-auto translate-y-0 scale-100 opacity-100"
+          : "pointer-events-none -translate-y-2 scale-95 opacity-0"
+          }`}
       >
         {!isDesktop && (
           <button
