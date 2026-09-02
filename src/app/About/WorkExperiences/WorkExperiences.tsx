@@ -128,7 +128,7 @@ export default function WorkExperienceTimeline() {
                     </span>
                     <div className="h-px flex-1 bg-background-second" />
                 </footer>
-                {/* TES GITHUB */}
+                {/* TES GITHUB lagi */}
             </div>
         </section>
     );
